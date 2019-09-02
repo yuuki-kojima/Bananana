@@ -68,8 +68,24 @@
             </div>
             <div v-if="dialogKey == 3">
               <v-card-title>
-                <span class="grey--text">Please Approve Token Transfer Before Selling.</span>
+                <p class="display-1 mx-auto">Initialize your account first!</p>
               </v-card-title>
+              <v-card-text>
+                <p class="">
+                  To approve Bananana to trade this token, you must first complete a free (plus gas) transaction.
+                </p>
+                <p class="">
+                  Keep this tab open while we wait for the blockchain to confirm your action. This only needs to be done
+                  once for all these items.
+                </p>
+              </v-card-text>
+              <img class="d-block mx-auto" src="@/assets/img/loading/preloader.gif" width="100" />
+              <div align="center">
+                <p align="center">
+                  WAITING FOR BLOCKCHAIN CONFIRMATION...
+                </p>
+                <v-btn v-if="etherscan" color="success" dark>View Transaction</v-btn>
+              </div>
             </div>
             <div v-if="dialogKey == 4">
               <v-card-title>
@@ -86,17 +102,6 @@
                 <span class="grey--text">Please Check Transaction on <a :href="etherscan">Etherscan.</a></span>
               </v-card-title>
             </div>
-            <div v-if="dialogKey == 7">
-              <v-card-title>
-                <span class="grey--text">Approval is complete. Continue selling assets from the "Sell" button.</span>
-              </v-card-title>
-              <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn color="primary" flat @click="closeDialog">
-                  Close
-                </v-btn>
-              </v-card-actions>
-            </div>
             <div v-if="dialogKey == 8">
               <v-card-title>
                 <span class="grey--text">Listing Successful!</span>
@@ -112,6 +117,10 @@
         </v-dialog>
       </v-card-actions>
     </v-layout>
+    <pre>{{ etherscan }}</pre>
+    <pre>{{ asset.owner.address }}</pre>
+    <pre>{{ this.$store.state.address }}</pre>
+    <pre>{{ asset.order }}</pre>
   </v-card>
 </template>
 
@@ -184,9 +193,8 @@ export default class Buttons extends Vue {
       true
     )
     this.etherscan = `${this.$config.etherscan}${txhash}`
-    this.openDialog(6)
     await this.$satellites.web3Wrapper.awaitTransactionSuccessAsync(txhash)
-    this.openDialog(7)
+    this.openDialog(2)
   }
 
   async executeBuy() {

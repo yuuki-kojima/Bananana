@@ -11,12 +11,12 @@ const nuxtConfig: NuxtConfiguration = {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: 'Satellites, the satellites NFT market place.' },
-      { hid: 'og:site_name', property: 'og:site_name', content: 'Satellites' },
+      { hid: 'description', name: 'description', content: 'Bananana, Decentralized NFT market place.' },
+      { hid: 'og:site_name', property: 'og:site_name', content: 'Bananana' },
       { hid: 'og:type', property: 'og:type', content: 'website' },
       { hid: 'og:url', property: 'og:url', content: '' },
-      { hid: 'og:title', property: 'og:title', content: 'Satellites' },
-      { hid: 'og:description', property: 'og:description', content: 'Satellites, the satellites NFT market place.' },
+      { hid: 'og:title', property: 'og:title', content: 'Bananana' },
+      { hid: 'og:description', property: 'og:description', content: 'Bananana, Decentralized NFT market place.' },
       {
         hid: 'og:image',
         property: 'og:image',
