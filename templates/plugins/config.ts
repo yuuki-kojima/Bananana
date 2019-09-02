@@ -1,12 +1,11 @@
-const networkId = 1
-const relayer = 'https://relayer-mainnet.nftsatellites.com/v2/'
+const networkId = 4
 const ga = 'UA-130401695-4'
 const feeBase = 10000
 const feePer = 100
 const satellitesAddress = '0x764Fe0b6dF8575b30bCfd0c9Bb2A7ADb390b5359'
-const satellitesFeeRatio = 100
+const satellitesFeeRatio = 0
 const ownerAddress = satellitesAddress
-const ownerFeeRatio = 900
+const ownerFeeRatio = 0
 
 const networkIdToInfura: { [networkId: number]: string } = {
   1: 'https://mainnet.infura.io/',
@@ -18,6 +17,11 @@ const networkIdToEtherscan: { [networkId: number]: string } = {
   4: 'https://rinkeby.etherscan.io/tx/'
 }
 
+const networkIdToRelayer: { [networkId: number]: string } = {
+  1: 'https://relayer-mainnet.nftsatellites.com/v2/',
+  4: 'https://relayer-rinkeby.nftsatellites.com/v2/'
+}
+
 const networkIdToAPI: { [networkId: number]: string } = {
   1: `https://api.opensea.io/api/v1/`,
   4: `https://rinkeby-api.opensea.io/api/v1/`
@@ -26,9 +30,9 @@ const networkIdToAPI: { [networkId: number]: string } = {
 const networkIdToTokens: { [networkId: number]: any[] } = {
   1: [
     {
-      contract: '0xf5b0a3efb8e8e4c201e2a935f110eaaf3ffecb8d',
-      symbol: 'AXIE',
-      name: 'AXIE'
+      contract: '0x67cbbb366a51fff9ad869d027e496ba49f5f6d55',
+      symbol: 'CSPL',
+      name: 'CryptoSpells'
     }
   ],
   4: [
@@ -65,7 +69,7 @@ for (let i = 0; i < networkIdToTokens[networkId].length; i++) {
 
 export const config = {
   networkId: networkId,
-  relayer: relayer,
+  relayer: networkIdToRelayer[networkId],
   ga: ga,
   infura: networkIdToInfura[networkId],
   etherscan: networkIdToEtherscan[networkId],

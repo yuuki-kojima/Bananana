@@ -86,6 +86,28 @@
                 <span class="grey--text">Please Check Transaction on <a :href="etherscan">Etherscan.</a></span>
               </v-card-title>
             </div>
+            <div v-if="dialogKey == 7">
+              <v-card-title>
+                <span class="grey--text">Approval is complete. Continue selling assets from the "Sell" button.</span>
+              </v-card-title>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="primary" flat @click="closeDialog">
+                  Close
+                </v-btn>
+              </v-card-actions>
+            </div>
+            <div v-if="dialogKey == 8">
+              <v-card-title>
+                <span class="grey--text">Listing Successful!</span>
+              </v-card-title>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="primary" flat @click="location.reload()">
+                  Reload
+                </v-btn>
+              </v-card-actions>
+            </div>
           </v-card>
         </v-dialog>
       </v-card-actions>
@@ -163,6 +185,8 @@ export default class Buttons extends Vue {
     )
     this.etherscan = `${this.$config.etherscan}${txhash}`
     this.openDialog(6)
+    await this.$satellites.web3Wrapper.awaitTransactionSuccessAsync(txhash)
+    this.openDialog(7)
   }
 
   async executeBuy() {
