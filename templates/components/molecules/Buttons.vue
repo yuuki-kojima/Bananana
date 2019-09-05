@@ -54,7 +54,7 @@
                 <span class="grey--text">Input Price. It will be sold with {{ computeFee() }}% fee. </span>
               </v-card-title>
               <v-card-text>
-                <v-text-field v-model="takerAssetAmount" label="amount" placeholder="ETH"></v-text-field>
+                <v-text-field v-model="takerAssetAmount" label="Amount(ETH)" placeholder="ETH"></v-text-field>
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
@@ -68,13 +68,13 @@
             </div>
             <div v-if="dialogKey == 3">
               <v-card-title>
-                <p class="display-1 mx-auto">Initialize your account first!</p>
+                <p class="title mx-auto">Initialize your account first!</p>
               </v-card-title>
               <v-card-text>
-                <p class="">
+                <p>
                   To approve Bananana to trade this token, you must first complete a free (plus gas) transaction.
                 </p>
-                <p class="">
+                <p>
                   Keep this tab open while we wait for the blockchain to confirm your action. This only needs to be done
                   once for all these items.
                 </p>
@@ -89,22 +89,24 @@
             </div>
             <div v-if="dialogKey == 4">
               <v-card-title>
-                <span class="grey--text">Please Confirm Transaction on Web3 Wallet.</span>
+                <span class="title mx-auto">Please Confirm Transaction on Web3 Wallet.</span>
               </v-card-title>
+              <img class="d-block mx-auto" src="@/assets/img/loading/preloader.gif" width="100" />
             </div>
             <div v-if="dialogKey == 5">
               <v-card-title>
-                <span class="grey--text">Please Confirm Transaction by Signature.</span>
+                <span class="title mx-auto">Please Confirm Transaction by Signature.</span>
               </v-card-title>
+              <img class="d-block mx-auto" src="@/assets/img/loading/preloader.gif" width="100" />
             </div>
             <div v-if="dialogKey == 6">
               <v-card-title>
                 <span class="grey--text">Please Check Transaction on <a :href="etherscan">Etherscan.</a></span>
               </v-card-title>
             </div>
-            <div v-if="dialogKey == 8">
+            <div v-if="dialogKey == 7">
               <v-card-title>
-                <span class="grey--text">Listing Successful!</span>
+                <span class="title mx-auto">Listing Successful!</span>
               </v-card-title>
               <v-card-actions>
                 <v-spacer></v-spacer>
@@ -181,7 +183,7 @@ export default class Buttons extends Vue {
       this.asset.token_id,
       this.takerAssetAmount
     )
-    location.reload()
+    this.openDialog(7)
   }
 
   async executeApprove() {
