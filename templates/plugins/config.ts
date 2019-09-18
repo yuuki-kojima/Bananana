@@ -19,7 +19,7 @@ const networkIdToEtherscan: { [networkId: number]: string } = {
 
 const networkIdToRelayer: { [networkId: number]: string } = {
   1: 'https://relayer-mainnet.nftsatellites.com/v2/',
-  4: 'https://relayer-rinkeby.nftsatellites.com/v2/'
+  4: 'https://zerox-relayer-test.herokuapp.com/v2/'
 }
 
 const networkIdToAPI: { [networkId: number]: string } = {

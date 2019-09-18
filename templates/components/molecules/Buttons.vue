@@ -84,7 +84,7 @@
                 <p align="center">
                   WAITING FOR BLOCKCHAIN CONFIRMATION...
                 </p>
-                <v-btn v-if="etherscan" color="success" dark>View Transaction</v-btn>
+                <v-btn v-if="etherscan" :href="etherscan" target="_blank" color="success" dark>View Transaction</v-btn>
               </div>
             </div>
             <div v-if="dialogKey == 4">
@@ -92,6 +92,12 @@
                 <span class="title mx-auto">Please Confirm Transaction on Web3 Wallet.</span>
               </v-card-title>
               <img class="d-block mx-auto" src="@/assets/img/loading/preloader.gif" width="100" />
+              <div align="center">
+                <p align="center">
+                  WAITING FOR BLOCKCHAIN CONFIRMATION...
+                </p>
+                <v-btn v-if="etherscan" :href="etherscan" target="_blank" color="success" dark>View Transaction</v-btn>
+              </div>
             </div>
             <div v-if="dialogKey == 5">
               <v-card-title>
@@ -101,8 +107,14 @@
             </div>
             <div v-if="dialogKey == 6">
               <v-card-title>
-                <span class="grey--text">Please Check Transaction on <a :href="etherscan">Etherscan.</a></span>
+                <span class="title mx-auto">Buying Successful!</span>
               </v-card-title>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="primary" flat @click="reload">
+                  Reload
+                </v-btn>
+              </v-card-actions>
             </div>
             <div v-if="dialogKey == 7">
               <v-card-title>
@@ -110,7 +122,29 @@
               </v-card-title>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="primary" flat @click="location.reload()">
+                <v-btn color="primary" flat @click="reload">
+                  Reload
+                </v-btn>
+              </v-card-actions>
+            </div>
+            <div v-if="dialogKey == 8">
+              <v-card-title>
+                <span class="title mx-auto">Cancel Successful!</span>
+              </v-card-title>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="primary" flat @click="reload">
+                  Reload
+                </v-btn>
+              </v-card-actions>
+            </div>
+            <div v-if="dialogKey == 9">
+              <v-card-title>
+                <span class="title mx-auto">Gift Successful!</span>
+              </v-card-title>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="primary" flat @click="reload">
                   Reload
                 </v-btn>
               </v-card-actions>
@@ -119,7 +153,6 @@
         </v-dialog>
       </v-card-actions>
     </v-layout>
-    <pre>{{ etherscan }}</pre>
     <pre>{{ asset.owner.address }}</pre>
     <pre>{{ this.$store.state.address }}</pre>
     <pre>{{ asset.order }}</pre>
@@ -138,6 +171,9 @@ export default class Buttons extends Vue {
   etherscan = ''
 
   @Prop() asset
+  reload() {
+    location.reload()
+  }
   computeFee() {
     return this.$config.defaultRatio / this.$config.feePer
   }
@@ -160,7 +196,8 @@ export default class Buttons extends Vue {
       this.asset.token_id
     )
     this.etherscan = `${this.$config.etherscan}${txhash}`
-    this.openDialog(6)
+    await this.$satellites.web3Wrapper.awaitTransactionSuccessAsync(txhash)
+    this.openDialog(9)
   }
   async sell() {
     const approved = await this.$satellites.erc721Token.isApprovedForAllAsync(
@@ -213,6 +250,7 @@ export default class Buttons extends Vue {
 
     const txhash = await this.$satellites.buy(this.$store.state.address, this.asset.order, recipients, fees)
     this.etherscan = `${this.$config.etherscan}${txhash}`
+    await this.$satellites.web3Wrapper.awaitTransactionSuccessAsync(txhash)
     this.openDialog(6)
   }
 
@@ -220,7 +258,8 @@ export default class Buttons extends Vue {
     this.openDialog(4)
     const txhash = await this.$satellites.cancel(this.asset.order)
     this.etherscan = `${this.$config.etherscan}${txhash}`
-    this.openDialog(6)
+    await this.$satellites.web3Wrapper.awaitTransactionSuccessAsync(txhash)
+    this.openDialog(8)
   }
 }
 </script>
