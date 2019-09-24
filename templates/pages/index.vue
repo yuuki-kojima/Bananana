@@ -1,13 +1,25 @@
 <template>
   <section class="container">
     <div>
-      <logo />
       <h1 class="title">
-        <img src="@/assets/img/top_visual/satellites.png" alt="" style="width:100%" />
+        Bananana
       </h1>
-      <div class="links">
-        <a href="https://github.com/block-base/satellites" target="_blank" class="button--grey">GitHub</a>
+      <h2 class="sub mb-5">
+        NFT exchange with 1% commission
+      </h2>
+      <div class="mb-4">
+        Currently, the following NFT transactions are supported.
       </div>
+      <ul class="dapps">
+        <li>
+          <nuxt-link class="flex" to="/cryptospells">
+            <div class="dapp-logo mr-3">
+              <img src="@/assets/img/dapp_logo/cryptospells.png" alt="cryptospells_logo" width="100%" />
+            </div>
+            <p class="dapp-name">CryptoSpells</p>
+          </nuxt-link>
+        </li>
+      </ul>
     </div>
   </section>
 </template>
@@ -24,8 +36,8 @@ export default class Index extends Vue {}
   min-height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: center;
   text-align: center;
+  margin-top: 100px;
 }
 
 .title {
@@ -33,27 +45,27 @@ export default class Index extends Vue {}
     Arial, sans-serif;
   display: block;
   font-weight: 300;
-  font-size: 100px;
+  font-size: 65px !important;
   color: #35495e;
   letter-spacing: 1px;
 }
 
-.links {
-  padding-top: 15px;
-}
-
-.button--grey {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #35495e;
+.sub {
   color: #35495e;
-  text-decoration: none;
-  padding: 10px 30px;
-  margin-left: 15px;
+  font-size: 18px;
 }
 
-.button--grey:hover {
-  color: #fff;
-  background-color: #35495e;
+.dapps .flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dapp-logo {
+  width: 80px;
+}
+
+.dapp-name {
+  font-size: 30px;
 }
 </style>

@@ -26,7 +26,6 @@ export default class Index extends Vue {
     let params
     if (dappName) {
       params = [this.$satellites.getDappAddresses(dappName)]
-      console.log(params)
     }
     const refinedOrders = await this.$satellites.getOrders(params)
     const assets = await this.getAssetDataForOrders(refinedOrders)
