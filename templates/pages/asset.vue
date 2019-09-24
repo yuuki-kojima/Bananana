@@ -28,6 +28,7 @@ export default class Index extends Vue {
     const order = await this.$satellites.getOrder(assetContractAddress, tokenId)
     asset.order = order
     this.asset = asset
+    console.log(asset)
     this.loading = false
   }
   async getAssetData(assetContractAddress, tokenId) {

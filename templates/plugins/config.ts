@@ -1,11 +1,11 @@
-const networkId = 4
+const networkId = 1
 const ga = 'UA-130401695-4'
 const feeBase = 10000
 const feePer = 100
 const satellitesAddress = '0x764Fe0b6dF8575b30bCfd0c9Bb2A7ADb390b5359'
 const satellitesFeeRatio = 0
-const ownerAddress = satellitesAddress
-const ownerFeeRatio = 0
+const ownerAddress = '0x4e66c8fea449D7aC5C2a55061c0FCf24C4106A9c'
+const ownerFeeRatio = 100
 
 const networkIdToInfura: { [networkId: number]: string } = {
   1: 'https://mainnet.infura.io/',
@@ -32,14 +32,16 @@ const networkIdToTokens: { [networkId: number]: any[] } = {
     {
       contract: '0x67cbbb366a51fff9ad869d027e496ba49f5f6d55',
       symbol: 'CSPL',
-      name: 'CryptoSpells'
+      name: 'CryptoSpells',
+      url: 'cryptospells'
     }
   ],
   4: [
     {
       contract: '0x84f6261350151dc9cbf5b33c5354fe9a82166e26',
       symbol: 'BBB',
-      name: 'BB Batch'
+      name: 'BB Batch',
+      url: 'bbb'
     }
   ]
 }

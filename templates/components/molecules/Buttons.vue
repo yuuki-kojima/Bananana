@@ -153,9 +153,6 @@
         </v-dialog>
       </v-card-actions>
     </v-layout>
-    <pre>{{ asset.owner.address }}</pre>
-    <pre>{{ this.$store.state.address }}</pre>
-    <pre>{{ asset.order }}</pre>
   </v-card>
 </template>
 
