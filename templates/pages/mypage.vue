@@ -33,6 +33,7 @@ export default class Index extends Vue {
     }
     this.assets = assets
     this.loading = false
+    console.log(Object.keys(assets).length)
   }
   async getAssetDataForOwner(owner: string) {
     let assetContractAddressesQuery = ''

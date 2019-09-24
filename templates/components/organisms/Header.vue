@@ -14,7 +14,7 @@
         </template>
         <v-list>
           <v-list-tile v-for="token in this.$config.tokens" :key="token.contract">
-            <a :href="`/market?address=${token.contract}`"
+            <a :href="`/${token.url}`"
               ><v-btn flat color="primary">{{ token.name }}</v-btn></a
             >
           </v-list-tile>
