@@ -25,10 +25,16 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
+import { Component, Vue } from 'nuxt-property-decorator'
 
 @Component
-export default class Index extends Vue {}
+export default class Index extends Vue {
+  head() {
+    return {
+      titleTemplate: ''
+    }
+  }
+}
 </script>
 
 <style scoped>
@@ -53,6 +59,10 @@ export default class Index extends Vue {}
 .sub {
   color: #35495e;
   font-size: 18px;
+}
+
+ul {
+  padding: 0;
 }
 
 .dapps .flex {

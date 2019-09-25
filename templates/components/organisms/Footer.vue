@@ -1,7 +1,7 @@
 <template>
   <v-footer class="white">
     <v-flex text-xs-center style="color: gray;">
-      &copy;2019 <a href="https://github.com/block-base/satellites">Powerd by Satellites</a>
+      &copy;2019 Bananana powerd by Satellites
     </v-flex>
   </v-footer>
 </template>
