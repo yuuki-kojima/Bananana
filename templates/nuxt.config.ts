@@ -52,7 +52,8 @@ const nuxtConfig: NuxtConfiguration = {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
-    '@nuxtjs/eslint-module'
+    '@nuxtjs/eslint-module',
+    '@nuxtjs/google-analytics'
   ],
   /*
    ** Axios module configuration
@@ -86,6 +87,9 @@ const nuxtConfig: NuxtConfiguration = {
         ['@babel/plugin-proposal-class-properties', { loose: true }]
       ]
     }
+  },
+  googleAnalytics: {
+    id: 'UA-120397644-6'
   }
 }
 export default nuxtConfig
