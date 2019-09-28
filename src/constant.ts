@@ -19,3 +19,8 @@ export const networkToAssetData: { [networkId: number]: string } = {
   1: `0xf47261b0000000000000000000000000${networkToSatellitesContractAddresses[1].passer.slice(2)}`,
   4: `0xf47261b0000000000000000000000000${networkToSatellitesContractAddresses[4].passer.slice(2)}`
 }
+
+export const dappAddresses: { [dappName: string]: string } = {
+  'cryptospells': '0x67cbbb366a51fff9ad869d027e496ba49f5f6d55',
+  'bbb': '0x84f6261350151dc9cbf5b33c5354fe9a82166e26'
+}

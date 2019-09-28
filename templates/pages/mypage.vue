@@ -8,7 +8,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
+import { Component, Vue } from 'nuxt-property-decorator'
 import Assets from '~/components/organisms/Assets.vue'
 import Loading from '~/components/organisms/Loading.vue'
 
@@ -19,6 +19,11 @@ import Loading from '~/components/organisms/Loading.vue'
   }
 })
 export default class Index extends Vue {
+  head() {
+    return {
+      title: 'Mypage'
+    }
+  }
   assets = null
   loading = true
   async mounted() {
@@ -33,7 +38,6 @@ export default class Index extends Vue {
     }
     this.assets = assets
     this.loading = false
-    console.log(Object.keys(assets).length)
   }
   async getAssetDataForOwner(owner: string) {
     let assetContractAddressesQuery = ''

@@ -6,8 +6,8 @@ const nuxtConfig: NuxtConfiguration = {
    ** Headers of the page
    */
   head: {
-    titleTemplate: '%s - ' + process.env.npm_package_name,
-    title: process.env.npm_package_name || '',
+    title: 'Bananana',
+    titleTemplate: '%s | Bananana',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -80,10 +80,12 @@ const nuxtConfig: NuxtConfiguration = {
    ** Build configuration
    */
   build: {
-    /*
-     ** You can extend webpack config here
-     */
-    //  extend(config, ctx) {}
+    babel: {
+      plugins: [
+        ['@babel/plugin-proposal-decorators', { legacy: true }],
+        ['@babel/plugin-proposal-class-properties', { loose: true }]
+      ]
+    }
   }
 }
 export default nuxtConfig

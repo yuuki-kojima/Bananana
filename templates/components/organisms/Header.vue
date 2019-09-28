@@ -1,6 +1,6 @@
 <template>
   <v-toolbar absolute flat clipped-left app class="white">
-    <a :href="`/`"><v-btn flat color="primary">Satellites</v-btn></a>
+    <nuxt-link :to="`/`"><v-btn flat color="primary">Bananana</v-btn></nuxt-link>
     <v-spacer></v-spacer>
     <v-toolbar-items>
       <v-btn v-if="this.$store.state.address" flat color="primary" to="/mypage">
@@ -14,9 +14,9 @@
         </template>
         <v-list>
           <v-list-tile v-for="token in this.$config.tokens" :key="token.contract">
-            <a :href="`/${token.url}`"
-              ><v-btn flat color="primary">{{ token.name }}</v-btn></a
-            >
+            <nuxt-link :to="`/${token.url}`">
+              <v-btn flat color="primary">{{ token.name }}</v-btn>
+            </nuxt-link>
           </v-list-tile>
         </v-list>
       </v-menu>

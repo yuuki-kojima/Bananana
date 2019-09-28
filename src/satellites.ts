@@ -21,7 +21,7 @@ import {
 import { Web3Wrapper } from '@0x/web3-wrapper'
 
 import { distributerAbi, passerAbi } from './abi'
-import { DECIMALS, GAS_LIMIT, NULL_ADDRESS, networkToSatellitesContractAddresses, networkToAssetData } from './constant'
+import { DECIMALS, GAS_LIMIT, NULL_ADDRESS, networkToSatellitesContractAddresses, networkToAssetData, dappAddresses } from './constant'
 import { DistributerContract } from './distributer'
 import { PasserContract } from './passer'
 import { RefinedOrders } from './interface'
@@ -217,5 +217,9 @@ export class Satellites {
       })
     }
     return order
+  }
+
+  getDappAddresses(dappName: string) {
+    return dappAddresses[dappName]
   }
 }

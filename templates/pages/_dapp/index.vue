@@ -8,7 +8,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
+import { Component, Vue } from 'nuxt-property-decorator'
 import Assets from '~/components/organisms/Assets.vue'
 import Loading from '~/components/organisms/Loading.vue'
 
@@ -19,6 +19,12 @@ import Loading from '~/components/organisms/Loading.vue'
   }
 })
 export default class Index extends Vue {
+  head() {
+    const dappName = this.$route.params.dapp
+    return {
+      title: dappName
+    }
+  }
   assets = null
   loading = true
   async mounted() {
@@ -26,7 +32,6 @@ export default class Index extends Vue {
     let params
     if (dappName) {
       params = [this.$satellites.getDappAddresses(dappName)]
-      console.log(params)
     }
     const refinedOrders = await this.$satellites.getOrders(params)
     const assets = await this.getAssetDataForOrders(refinedOrders)
