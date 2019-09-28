@@ -5,7 +5,7 @@
         Bananana
       </h1>
       <h2 class="sub mb-5">
-        NFT exchange with 1% commission
+        NFT exchange with 0% commission
       </h2>
       <div class="mb-4">
         Currently, the following NFT transactions are supported.
@@ -39,11 +39,11 @@ export default class Index extends Vue {
 
 <style scoped>
 .container {
-  min-height: 100vh;
+  min-height: calc(100vh - 80px -30px);
   display: flex;
   justify-content: center;
   text-align: center;
-  margin-top: 100px;
+  margin-top: 71px;
 }
 
 .title {
