@@ -39,11 +39,11 @@ export default class Index extends Vue {
 
 <style scoped>
 .container {
-  min-height: calc(100vh - 80px -30px);
+  min-height: calc(100vh - 116px);
   display: flex;
   justify-content: center;
   text-align: center;
-  margin-top: 71px;
+  margin-top: 63px;
 }
 
 .title {
