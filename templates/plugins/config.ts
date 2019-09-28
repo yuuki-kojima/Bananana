@@ -1,5 +1,5 @@
 const networkId = 1
-const ga = 'UA-130401695-4'
+const ga = 'UA-120397644-6'
 const feeBase = 10000
 const feePer = 100
 const satellitesAddress = '0x764Fe0b6dF8575b30bCfd0c9Bb2A7ADb390b5359'
