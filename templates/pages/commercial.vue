@@ -41,7 +41,7 @@ export default class Commercial extends Vue {}
 
 <style scoped>
 .container {
-  min-height: calc(100vh - 80px - 30px);
+  min-height: calc(100vh - 116px);
   margin-top: 71px;
   max-width: 600px;
 }
