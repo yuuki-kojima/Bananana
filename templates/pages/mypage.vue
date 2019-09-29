@@ -21,7 +21,8 @@ import Loading from '~/components/organisms/Loading.vue'
 export default class Index extends Vue {
   head() {
     return {
-      title: 'Mypage'
+      title: 'Mypage',
+      titleTemplate: '%s | Bananana'
     }
   }
   assets = null
