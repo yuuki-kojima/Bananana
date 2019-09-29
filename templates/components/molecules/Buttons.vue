@@ -111,8 +111,8 @@
               </v-card-title>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="primary" flat @click="reload">
-                  Reload
+                <v-btn color="primary" flat @click="closeDialog">
+                  Close
                 </v-btn>
               </v-card-actions>
             </div>
@@ -122,8 +122,8 @@
               </v-card-title>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="primary" flat @click="reload">
-                  Reload
+                <v-btn color="primary" flat @click="closeDialog">
+                  Close
                 </v-btn>
               </v-card-actions>
             </div>
@@ -133,8 +133,8 @@
               </v-card-title>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="primary" flat @click="reload">
-                  Reload
+                <v-btn color="primary" flat @click="closeDialog">
+                  Close
                 </v-btn>
               </v-card-actions>
             </div>
@@ -144,8 +144,8 @@
               </v-card-title>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="primary" flat @click="reload">
-                  Reload
+                <v-btn color="primary" flat @click="closeDialog">
+                  Close
                 </v-btn>
               </v-card-actions>
             </div>
@@ -168,9 +168,7 @@ export default class Buttons extends Vue {
   etherscan = ''
 
   @Prop() asset
-  reload() {
-    location.reload()
-  }
+  @Prop() updateAsset
   computeFee() {
     return this.$config.defaultRatio / this.$config.feePer
   }
@@ -194,6 +192,7 @@ export default class Buttons extends Vue {
     )
     this.etherscan = `${this.$config.etherscan}${txhash}`
     await this.$satellites.web3Wrapper.awaitTransactionSuccessAsync(txhash)
+    await this.updateAsset()
     this.openDialog(9)
   }
   async sell() {
@@ -217,6 +216,7 @@ export default class Buttons extends Vue {
       this.asset.token_id,
       this.takerAssetAmount
     )
+    await this.updateAsset()
     this.openDialog(7)
   }
 
@@ -248,6 +248,7 @@ export default class Buttons extends Vue {
     const txhash = await this.$satellites.buy(this.$store.state.address, this.asset.order, recipients, fees)
     this.etherscan = `${this.$config.etherscan}${txhash}`
     await this.$satellites.web3Wrapper.awaitTransactionSuccessAsync(txhash)
+    await this.updateAsset()
     this.openDialog(6)
   }
 
@@ -256,6 +257,7 @@ export default class Buttons extends Vue {
     const txhash = await this.$satellites.cancel(this.asset.order)
     this.etherscan = `${this.$config.etherscan}${txhash}`
     await this.$satellites.web3Wrapper.awaitTransactionSuccessAsync(txhash)
+    await this.updateAsset()
     this.openDialog(8)
   }
 }

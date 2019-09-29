@@ -34,14 +34,21 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
+import { Component, Vue } from 'nuxt-property-decorator'
 @Component
-export default class Commercial extends Vue {}
+export default class Commercial extends Vue {
+  head() {
+    return {
+      title: 'Commercial',
+      titleTemplate: '%s | Bananana'
+    }
+  }
+}
 </script>
 
 <style scoped>
 .container {
-  min-height: calc(100vh - 80px - 30px);
+  min-height: calc(100vh - 116px);
   margin-top: 71px;
   max-width: 600px;
 }

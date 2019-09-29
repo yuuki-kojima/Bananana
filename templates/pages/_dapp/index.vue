@@ -22,41 +22,42 @@ export default class Index extends Vue {
   head() {
     const dappName = this.$route.params.dapp
     return {
-      title: dappName
+      title: dappName,
+      titleTemplate: '%s | Bananana'
     }
   }
+  dappName = ''
   assets = null
   loading = true
   async mounted() {
-    const dappName = this.$route.params.dapp
-    let params
-    if (dappName) {
-      params = [this.$constant.dappAddresses[dappName]]
+    this.dappName = this.$route.params.dapp
+    let contractAddress
+    if (this.dappName) {
+      contractAddress = [this.$constant.dappAddresses[this.dappName]]
     }
-    const refinedOrders = await this.$satellites.getOrders(params)
-    const assets = await this.getAssetDataForOrders(refinedOrders)
+    await this.updateOrders(contractAddress)
+  }
+
+  async updateOrders(contractAddress) {
+    this.loading = true
+    const refinedOrders = await this.$satellites.getOrders(contractAddress)
+    const assets = await this.getAssetDataForOrders(refinedOrders, contractAddress)
     this.assets = assets
     this.loading = false
   }
-  async getAssetDataForOrders(refinedOrders) {
+
+  async getAssetDataForOrders(refinedOrders, contractAddress) {
     const assets: any = []
-    const promisses: any = []
-    for (const tokenAddress in refinedOrders) {
-      const baseURL = `${this.$config.api}assets?asset_contract_addresses=${tokenAddress}`
-      for (const tokenId in refinedOrders[tokenAddress]) {
-        const requestURL = `${baseURL}&token_ids=${tokenId}`
-        promisses.push(this.$axios.get(requestURL))
+    const tokenIds = Object.keys(refinedOrders[contractAddress])
+    const tokenIdsQueryParam = tokenIds.map((id: string) => `token_ids=${id}`).join('&')
+    const requestURL = `${this.$config.api}assets?asset_contract_address=${contractAddress}&${tokenIdsQueryParam}`
+    const response = await this.$axios.get(requestURL)
+    response.data.assets.map((asset) => {
+      if (refinedOrders[asset.asset_contract.address][asset.token_id]) {
+        asset.order = refinedOrders[asset.asset_contract.address][asset.token_id]
       }
-    }
-    const resolves = await Promise.all(promisses)
-    for (const resolve of resolves) {
-      for (const asset of (resolve as any).data.assets) {
-        if (refinedOrders[asset.asset_contract.address][asset.token_id]) {
-          asset.order = refinedOrders[asset.asset_contract.address][asset.token_id]
-        }
-        assets.push(asset)
-      }
-    }
+      assets.push(asset)
+    })
     return assets
   }
 }
