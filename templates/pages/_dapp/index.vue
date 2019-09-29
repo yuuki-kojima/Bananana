@@ -22,22 +22,30 @@ export default class Index extends Vue {
   head() {
     const dappName = this.$route.params.dapp
     return {
-      title: dappName
+      title: dappName,
+      titleTemplate: '%s | Bananana'
     }
   }
+  dappName = ''
   assets = null
   loading = true
   async mounted() {
-    const dappName = this.$route.params.dapp
+    this.dappName = this.$route.params.dapp
     let params
-    if (dappName) {
-      params = [this.$constant.dappAddresses[dappName]]
+    if (this.dappName) {
+      params = [this.$constant.dappAddresses[this.dappName]]
     }
+    await this.updateOrders(params)
+  }
+
+  async updateOrders(params) {
+    this.loading = true
     const refinedOrders = await this.$satellites.getOrders(params)
     const assets = await this.getAssetDataForOrders(refinedOrders)
     this.assets = assets
     this.loading = false
   }
+
   async getAssetDataForOrders(refinedOrders) {
     const assets: any = []
     const promisses: any = []

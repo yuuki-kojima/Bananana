@@ -7,7 +7,6 @@ const nuxtConfig: NuxtConfiguration = {
    */
   head: {
     title: 'Bananana',
-    titleTemplate: '%s | Bananana',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -20,12 +19,12 @@ const nuxtConfig: NuxtConfiguration = {
       {
         hid: 'og:image',
         property: 'og:image',
-        content: 'https://ipfs.io/ipfs/QmQ5ryYFY7oQnE2meQhGvLE9BmYWzke79ZT4ZeFkm3JakT'
+        content: ''
       },
       { hid: 'twitter:card', property: 'twitter:card', content: 'summary_large_image' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      /* { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }, */
       {
         rel: 'stylesheet',
         href: 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons'
