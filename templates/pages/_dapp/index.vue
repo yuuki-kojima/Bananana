@@ -47,16 +47,18 @@ export default class Index extends Vue {
 
   async getAssetDataForOrders(refinedOrders, contractAddress) {
     const assets: any = []
-    const tokenIds = Object.keys(refinedOrders[contractAddress])
-    const tokenIdsQueryParam = tokenIds.map((id: string) => `token_ids=${id}`).join('&')
-    const requestURL = `${this.$config.api}assets?asset_contract_address=${contractAddress}&${tokenIdsQueryParam}`
-    const response = await this.$axios.get(requestURL)
-    response.data.assets.map((asset) => {
-      if (refinedOrders[asset.asset_contract.address][asset.token_id]) {
-        asset.order = refinedOrders[asset.asset_contract.address][asset.token_id]
-      }
-      assets.push(asset)
-    })
+    if (Object.keys(refinedOrders).length !== 0) {
+      const tokenIds = Object.keys(refinedOrders[contractAddress])
+      const tokenIdsQueryParam = tokenIds.map((id: string) => `token_ids=${id}`).join('&')
+      const requestURL = `${this.$config.api}assets?asset_contract_address=${contractAddress}&${tokenIdsQueryParam}`
+      const response = await this.$axios.get(requestURL)
+      response.data.assets.map((asset) => {
+        if (refinedOrders[asset.asset_contract.address][asset.token_id]) {
+          asset.order = refinedOrders[asset.asset_contract.address][asset.token_id]
+        }
+        assets.push(asset)
+      })
+    }
     return assets
   }
 }
