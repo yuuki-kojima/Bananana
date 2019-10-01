@@ -26,14 +26,13 @@ export default class Index extends Vue {
       titleTemplate: '%s | Bananana'
     }
   }
-  dappName = ''
   assets = null
   loading = true
   async mounted() {
-    this.dappName = this.$route.params.dapp
+    const dappName = this.$route.params.dapp
     let contractAddress
-    if (this.dappName) {
-      contractAddress = [this.$constant.dappAddresses[this.dappName]]
+    if (dappName) {
+      contractAddress = [this.$config.tokens[dappName].contract]
     }
     await this.updateOrders(contractAddress)
   }

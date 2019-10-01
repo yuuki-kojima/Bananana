@@ -1,3 +1,5 @@
+import { constant } from './constant'
+
 const networkId = 1
 const ga = 'UA-120397644-6'
 const feeBase = 10000
@@ -27,23 +29,9 @@ const networkIdToAPI: { [networkId: number]: string } = {
   4: `https://rinkeby-api.opensea.io/api/v1/`
 }
 
-const networkIdToTokens: { [networkId: number]: any[] } = {
-  1: [
-    {
-      contract: '0x67cbbb366a51fff9ad869d027e496ba49f5f6d55',
-      symbol: 'CSPL',
-      name: 'CryptoSpells',
-      url: 'cryptospells'
-    }
-  ],
-  4: [
-    {
-      contract: '0x84f6261350151dc9cbf5b33c5354fe9a82166e26',
-      symbol: 'BBB',
-      name: 'BB Batch',
-      url: 'bbb'
-    }
-  ]
+const networkIdToTokens: { [networkId: number]: object } = {
+  1: constant.dapps,
+  4: constant.dappsDev
 }
 
 const feeDistribution = [
@@ -65,8 +53,8 @@ for (let i = 0; i < feeDistribution.length; i++) {
 }
 
 const whitelists: any[] = []
-for (let i = 0; i < networkIdToTokens[networkId].length; i++) {
-  whitelists.push(networkIdToTokens[networkId][i].contract)
+for (let i = 0; i < Object.keys(networkIdToTokens[networkId]).length; i++) {
+  whitelists.push(Object.entries(networkIdToTokens[networkId])[i][1].contract)
 }
 
 export const config = {
