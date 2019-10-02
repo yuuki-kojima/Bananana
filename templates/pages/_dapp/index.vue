@@ -34,7 +34,7 @@ export default class Index extends Vue {
       titleTemplate: '%s | Bananana'
     }
   }
-  assets = null
+  assets: any[] = []
   filteredAssets: any[] = []
   sortFilters: any[] = []
   dappFilters: any[] = []
