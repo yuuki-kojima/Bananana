@@ -51,7 +51,7 @@ export default class Index extends Vue {
     // Set Filter Item
     this.sortFilters = this.$constant.commonFilter
     this.dappFilters = this.$config.tokens[this.$route.params.dapp].filters
-    this.setInitialFilterState(this.filters)
+    this.setInitialFilterState()
   }
 
   setInitialFilterState() {
