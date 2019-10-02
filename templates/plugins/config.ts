@@ -1,6 +1,6 @@
 import { constant } from './constant'
 
-const networkId = 4
+const networkId = 1
 const ga = 'UA-120397644-6'
 const feeBase = 10000
 const feePer = 100
