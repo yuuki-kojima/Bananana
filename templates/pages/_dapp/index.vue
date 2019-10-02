@@ -2,7 +2,12 @@
   <v-content>
     <v-container>
       <Loading v-if="loading"></Loading>
-      <Filters v-if="assets" :filters="filters" :update-filter-state="updateFilterState"></Filters>
+      <Filters
+        v-if="assets"
+        :sort-filters="sortFilters"
+        :dapp-filters="dappFilters"
+        :update-filter-state="updateFilterState"
+      ></Filters>
       <Assets v-if="assets" :assets="filteredAssets"></Assets>
     </v-container>
   </v-content>
@@ -31,7 +36,8 @@ export default class Index extends Vue {
   }
   assets = null
   filteredAssets: object[] = []
-  filters: object[] = []
+  sortFilters: object[] = []
+  dappFilters: object[] = []
   filterState: object[] = []
   loading = true
   async mounted() {
@@ -43,13 +49,13 @@ export default class Index extends Vue {
     }
     await this.updateOrders(contractAddress)
     // Set Filter Item
-    const commonFilter = this.$constant.commonFilter
-    const dappsFilter = this.$config.tokens[this.$route.params.dapp].filters
-    this.filters = [...dappsFilter, ...commonFilter]
+    this.sortFilters = this.$constant.commonFilter
+    this.dappFilters = this.$config.tokens[this.$route.params.dapp].filters
     this.setInitialFilterState(this.filters)
   }
 
-  setInitialFilterState(filters) {
+  setInitialFilterState() {
+    const filters = [...this.dappFilters, ...this.sortFilters]
     this.filterState = filters.map((filter) => {
       return { key: filter.key.value, value: filter.initialOption.value }
     })
@@ -66,11 +72,11 @@ export default class Index extends Vue {
     const baseAssets = [...this.assets]
     // Sorting Commmon Options
     let sortedAssets
-    const otherOption = this.filterState.find((state) => state.key === 'others')
+    const otherOption = this.filterState.find((state) => state.key === 'sort')
     otherOption.value === 'recently'
       ? (sortedAssets = this.assets)
       : (sortedAssets = baseAssets.sort((a, b) => {
-          const otherOption = this.filterState.find((state) => state.key === 'others')
+          const otherOption = this.filterState.find((state) => state.key === 'sort')
           let result
           switch (otherOption.value) {
             case 'lowest':
@@ -87,7 +93,7 @@ export default class Index extends Vue {
     // Filtering Unique Options
     const filteredAssets = sortedAssets.filter((asset) => {
       const state = this.filterState.map((state) => {
-        if (state.key !== 'others' && state.value !== 'all') {
+        if (state.key !== 'sort' && state.value !== 'all') {
           const traits = asset.traits.filter((trait) => trait.trait_type === state.key)
           if (traits.length > 0) {
             if (this.hasPlusString(state.value)) {

@@ -67,7 +67,7 @@ const dappsDev: { [dappName: string]: DappsObj } = {
 
 const commonFilter = [
   {
-    key: { text: 'Others', value: 'others' },
+    key: { text: 'Sort', value: 'sort' },
     initialOption: { text: 'Recently Listed', value: 'recently' },
     options: [
       { text: 'Recently Listed', value: 'recently' },
