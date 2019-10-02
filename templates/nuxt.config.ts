@@ -6,26 +6,25 @@ const nuxtConfig: NuxtConfiguration = {
    ** Headers of the page
    */
   head: {
-    titleTemplate: '%s - ' + process.env.npm_package_name,
-    title: process.env.npm_package_name || '',
+    title: 'Bananana',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: 'Satellites, the satellites NFT market place.' },
-      { hid: 'og:site_name', property: 'og:site_name', content: 'Satellites' },
+      { hid: 'description', name: 'description', content: 'Bananana, Decentralized NFT market place.' },
+      { hid: 'og:site_name', property: 'og:site_name', content: 'Bananana' },
       { hid: 'og:type', property: 'og:type', content: 'website' },
       { hid: 'og:url', property: 'og:url', content: '' },
-      { hid: 'og:title', property: 'og:title', content: 'Satellites' },
-      { hid: 'og:description', property: 'og:description', content: 'Satellites, the satellites NFT market place.' },
+      { hid: 'og:title', property: 'og:title', content: 'Bananana' },
+      { hid: 'og:description', property: 'og:description', content: 'Bananana, Decentralized NFT market place.' },
       {
         hid: 'og:image',
         property: 'og:image',
-        content: 'https://ipfs.io/ipfs/QmQ5ryYFY7oQnE2meQhGvLE9BmYWzke79ZT4ZeFkm3JakT'
+        content: ''
       },
       { hid: 'twitter:card', property: 'twitter:card', content: 'summary_large_image' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      /* { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }, */
       {
         rel: 'stylesheet',
         href: 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons'
@@ -52,7 +51,8 @@ const nuxtConfig: NuxtConfiguration = {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
-    '@nuxtjs/eslint-module'
+    '@nuxtjs/eslint-module',
+    '@nuxtjs/google-analytics'
   ],
   /*
    ** Axios module configuration
@@ -80,10 +80,15 @@ const nuxtConfig: NuxtConfiguration = {
    ** Build configuration
    */
   build: {
-    /*
-     ** You can extend webpack config here
-     */
-    //  extend(config, ctx) {}
+    babel: {
+      plugins: [
+        ['@babel/plugin-proposal-decorators', { legacy: true }],
+        ['@babel/plugin-proposal-class-properties', { loose: true }]
+      ]
+    }
+  },
+  googleAnalytics: {
+    id: 'UA-120397644-6'
   }
 }
 export default nuxtConfig

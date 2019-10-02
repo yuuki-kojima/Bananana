@@ -54,7 +54,7 @@
                 <span class="grey--text">Input Price. It will be sold with {{ computeFee() }}% fee. </span>
               </v-card-title>
               <v-card-text>
-                <v-text-field v-model="takerAssetAmount" label="amount" placeholder="ETH"></v-text-field>
+                <v-text-field v-model="takerAssetAmount" label="Amount(ETH)" placeholder="ETH"></v-text-field>
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
@@ -68,23 +68,86 @@
             </div>
             <div v-if="dialogKey == 3">
               <v-card-title>
-                <span class="grey--text">Please Approve Token Transfer Before Selling.</span>
+                <p class="title mx-auto">Initialize your account first!</p>
               </v-card-title>
+              <v-card-text>
+                <p>
+                  To approve Bananana to trade this token, you must first complete a free (plus gas) transaction.
+                </p>
+                <p>
+                  Keep this tab open while we wait for the blockchain to confirm your action. This only needs to be done
+                  once for all these items.
+                </p>
+              </v-card-text>
+              <img class="d-block mx-auto" src="@/assets/img/loading/preloader.gif" width="100" />
+              <div align="center">
+                <p align="center">
+                  WAITING FOR BLOCKCHAIN CONFIRMATION...
+                </p>
+                <v-btn v-if="etherscan" :href="etherscan" target="_blank" color="success" dark>View Transaction</v-btn>
+              </div>
             </div>
             <div v-if="dialogKey == 4">
               <v-card-title>
-                <span class="grey--text">Please Confirm Transaction on Web3 Wallet.</span>
+                <span class="title mx-auto">Please Confirm Transaction on Web3 Wallet.</span>
               </v-card-title>
+              <img class="d-block mx-auto" src="@/assets/img/loading/preloader.gif" width="100" />
+              <div align="center">
+                <p align="center">
+                  WAITING FOR BLOCKCHAIN CONFIRMATION...
+                </p>
+                <v-btn v-if="etherscan" :href="etherscan" target="_blank" color="success" dark>View Transaction</v-btn>
+              </div>
             </div>
             <div v-if="dialogKey == 5">
               <v-card-title>
-                <span class="grey--text">Please Confirm Transaction by Signature.</span>
+                <span class="title mx-auto">Please Confirm Transaction by Signature.</span>
               </v-card-title>
+              <img class="d-block mx-auto" src="@/assets/img/loading/preloader.gif" width="100" />
             </div>
             <div v-if="dialogKey == 6">
               <v-card-title>
-                <span class="grey--text">Please Check Transaction on <a :href="etherscan">Etherscan.</a></span>
+                <span class="title mx-auto">Buying Successful!</span>
               </v-card-title>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="primary" flat @click="closeDialog">
+                  Close
+                </v-btn>
+              </v-card-actions>
+            </div>
+            <div v-if="dialogKey == 7">
+              <v-card-title>
+                <span class="title mx-auto">Listing Successful!</span>
+              </v-card-title>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="primary" flat @click="closeDialog">
+                  Close
+                </v-btn>
+              </v-card-actions>
+            </div>
+            <div v-if="dialogKey == 8">
+              <v-card-title>
+                <span class="title mx-auto">Cancel Successful!</span>
+              </v-card-title>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="primary" flat @click="closeDialog">
+                  Close
+                </v-btn>
+              </v-card-actions>
+            </div>
+            <div v-if="dialogKey == 9">
+              <v-card-title>
+                <span class="title mx-auto">Gift Successful!</span>
+              </v-card-title>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="primary" flat @click="closeDialog">
+                  Close
+                </v-btn>
+              </v-card-actions>
             </div>
           </v-card>
         </v-dialog>
@@ -105,6 +168,7 @@ export default class Buttons extends Vue {
   etherscan = ''
 
   @Prop() asset
+  @Prop() updateAsset
   computeFee() {
     return this.$config.defaultRatio / this.$config.feePer
   }
@@ -127,7 +191,9 @@ export default class Buttons extends Vue {
       this.asset.token_id
     )
     this.etherscan = `${this.$config.etherscan}${txhash}`
-    this.openDialog(6)
+    await this.$satellites.web3Wrapper.awaitTransactionSuccessAsync(txhash)
+    await this.updateAsset()
+    this.openDialog(9)
   }
   async sell() {
     const approved = await this.$satellites.erc721Token.isApprovedForAllAsync(
@@ -150,7 +216,8 @@ export default class Buttons extends Vue {
       this.asset.token_id,
       this.takerAssetAmount
     )
-    location.reload()
+    await this.updateAsset()
+    this.openDialog(7)
   }
 
   async executeApprove() {
@@ -162,7 +229,8 @@ export default class Buttons extends Vue {
       true
     )
     this.etherscan = `${this.$config.etherscan}${txhash}`
-    this.openDialog(6)
+    await this.$satellites.web3Wrapper.awaitTransactionSuccessAsync(txhash)
+    this.openDialog(2)
   }
 
   async executeBuy() {
@@ -179,6 +247,8 @@ export default class Buttons extends Vue {
 
     const txhash = await this.$satellites.buy(this.$store.state.address, this.asset.order, recipients, fees)
     this.etherscan = `${this.$config.etherscan}${txhash}`
+    await this.$satellites.web3Wrapper.awaitTransactionSuccessAsync(txhash)
+    await this.updateAsset()
     this.openDialog(6)
   }
 
@@ -186,7 +256,9 @@ export default class Buttons extends Vue {
     this.openDialog(4)
     const txhash = await this.$satellites.cancel(this.asset.order)
     this.etherscan = `${this.$config.etherscan}${txhash}`
-    this.openDialog(6)
+    await this.$satellites.web3Wrapper.awaitTransactionSuccessAsync(txhash)
+    await this.updateAsset()
+    this.openDialog(8)
   }
 }
 </script>

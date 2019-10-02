@@ -2,13 +2,13 @@
   <v-content>
     <v-container>
       <Loading v-if="loading"></Loading>
-      <Detail v-if="asset" :asset="asset"></Detail>
+      <Detail v-if="asset" :asset="asset" :update-asset="updateAsset"></Detail>
     </v-container>
   </v-content>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
+import { Component, Vue } from 'nuxt-property-decorator'
 import Detail from '~/components/organisms/Detail.vue'
 import Loading from '~/components/organisms/Loading.vue'
 
@@ -19,9 +19,21 @@ import Loading from '~/components/organisms/Loading.vue'
   }
 })
 export default class Index extends Vue {
+  head() {
+    return {
+      title: 'AssetInfo',
+      titleTemplate: '%s | Bananana'
+    }
+  }
+
   asset = null
   loading = true
   async mounted() {
+    await this.updateAsset()
+  }
+
+  async updateAsset() {
+    this.loading = true
     const tokenId = this.$route.query.id
     const assetContractAddress = this.$route.query.address
     const asset = await this.getAssetData(assetContractAddress, tokenId)
@@ -30,6 +42,7 @@ export default class Index extends Vue {
     this.asset = asset
     this.loading = false
   }
+
   async getAssetData(assetContractAddress, tokenId) {
     const asset = await this.$axios.get(
       `${this.$config.api}assets?token_ids=${tokenId}&asset_contract_address=${assetContractAddress}`

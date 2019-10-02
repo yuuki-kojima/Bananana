@@ -3,3 +3,8 @@
   base = "templates"
   publish = "templates/dist/"
   command = "npm run generate"
+
+[[redirects]]
+from = "/*"
+to = "/index.html"
+status = 200

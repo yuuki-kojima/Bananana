@@ -1,12 +1,13 @@
+import { constant } from './constant'
+
 const networkId = 1
-const relayer = 'https://relayer-mainnet.nftsatellites.com/v2/'
-const ga = 'UA-130401695-4'
+const ga = 'UA-120397644-6'
 const feeBase = 10000
 const feePer = 100
 const satellitesAddress = '0x764Fe0b6dF8575b30bCfd0c9Bb2A7ADb390b5359'
-const satellitesFeeRatio = 100
-const ownerAddress = satellitesAddress
-const ownerFeeRatio = 900
+const satellitesFeeRatio = 0
+const ownerAddress = '0x4e66c8fea449D7aC5C2a55061c0FCf24C4106A9c'
+const ownerFeeRatio = 0
 
 const networkIdToInfura: { [networkId: number]: string } = {
   1: 'https://mainnet.infura.io/',
@@ -18,26 +19,19 @@ const networkIdToEtherscan: { [networkId: number]: string } = {
   4: 'https://rinkeby.etherscan.io/tx/'
 }
 
+const networkIdToRelayer: { [networkId: number]: string } = {
+  1: 'https://relayer-mainnet.nftsatellites.com/v2/',
+  4: 'https://zerox-relayer-test.herokuapp.com/v2/'
+}
+
 const networkIdToAPI: { [networkId: number]: string } = {
   1: `https://api.opensea.io/api/v1/`,
   4: `https://rinkeby-api.opensea.io/api/v1/`
 }
 
-const networkIdToTokens: { [networkId: number]: any[] } = {
-  1: [
-    {
-      contract: '0xf5b0a3efb8e8e4c201e2a935f110eaaf3ffecb8d',
-      symbol: 'AXIE',
-      name: 'AXIE'
-    }
-  ],
-  4: [
-    {
-      contract: '0x84f6261350151dc9cbf5b33c5354fe9a82166e26',
-      symbol: 'BBB',
-      name: 'BB Batch'
-    }
-  ]
+const networkIdToTokens: { [networkId: number]: object } = {
+  1: constant.dapps,
+  4: constant.dappsDev
 }
 
 const feeDistribution = [
@@ -59,13 +53,13 @@ for (let i = 0; i < feeDistribution.length; i++) {
 }
 
 const whitelists: any[] = []
-for (let i = 0; i < networkIdToTokens[networkId].length; i++) {
-  whitelists.push(networkIdToTokens[networkId][i].contract)
+for (let i = 0; i < Object.keys(networkIdToTokens[networkId]).length; i++) {
+  whitelists.push(Object.entries(networkIdToTokens[networkId])[i][1].contract)
 }
 
 export const config = {
   networkId: networkId,
-  relayer: relayer,
+  relayer: networkIdToRelayer[networkId],
   ga: ga,
   infura: networkIdToInfura[networkId],
   etherscan: networkIdToEtherscan[networkId],

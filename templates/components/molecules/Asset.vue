@@ -9,7 +9,7 @@
         }
       }"
     >
-      <v-img :src="asset.image_url" aspect-ratio="1"
+      <v-img class="mx-auto" :src="asset.image_url" max-width="300px"
         ><v-btn v-if="asset.order" color="secondary" class="opacity" small
           ><v-icon small left>label</v-icon>{{ computePrice(asset.order.takerAssetAmount) }} ETH</v-btn
         >
@@ -45,7 +45,7 @@ export default class Asset extends Vue {
 
 <style scoped>
 .opacity {
-  opacity: 0.6;
+  opacity: 0.85;
 }
 
 /*
