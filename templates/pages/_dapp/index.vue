@@ -35,10 +35,10 @@ export default class Index extends Vue {
     }
   }
   assets = null
-  filteredAssets: object[] = []
-  sortFilters: object[] = []
-  dappFilters: object[] = []
-  filterState: object[] = []
+  filteredAssets: any[] = []
+  sortFilters: any[] = []
+  dappFilters: any[] = []
+  filterState: any[] = []
   loading = true
   async mounted() {
     // Initialize Order
@@ -57,6 +57,7 @@ export default class Index extends Vue {
   setInitialFilterState() {
     const filters = [...this.dappFilters, ...this.sortFilters]
     this.filterState = filters.map((filter) => {
+      console.log(filter)
       return { key: filter.key.value, value: filter.initialOption.value }
     })
   }
