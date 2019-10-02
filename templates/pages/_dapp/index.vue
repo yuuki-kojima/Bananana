@@ -57,7 +57,6 @@ export default class Index extends Vue {
   setInitialFilterState() {
     const filters = [...this.dappFilters, ...this.sortFilters]
     this.filterState = filters.map((filter) => {
-      console.log(filter)
       return { key: filter.key.value, value: filter.initialOption.value }
     })
   }
