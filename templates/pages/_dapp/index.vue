@@ -8,7 +8,7 @@
         :dapp-filters="dappFilters"
         :update-filter-state="updateFilterState"
       ></Filters>
-      <Assets v-if="assets" :assets="filteredAssets"></Assets>
+      <Assets v-if="assets" :loading="loading" :assets="filteredAssets"></Assets>
     </v-container>
   </v-content>
 </template>
