@@ -1,7 +1,7 @@
 <template>
   <section class="container">
     <div>
-      <h1 class="title">
+      <h1 class="title mb-3">
         Bananana
       </h1>
       <h2 class="sub mb-5">
@@ -11,12 +11,12 @@
         Currently, the following NFT transactions are supported.
       </div>
       <ul class="dapps">
-        <li>
-          <nuxt-link class="flex" to="/cryptospells">
+        <li v-for="token in tokens" :key="token.contract">
+          <nuxt-link class="flex" :to="`/${token.url}`">
             <div class="dapp-logo mr-3">
-              <img src="@/assets/img/dapp_logo/cryptospells.png" alt="cryptospells_logo" width="100%" />
+              <img :src="token.avatar" width="100%" />
             </div>
-            <p class="dapp-name">CryptoSpells</p>
+            <p class="dapp-name black--text" light>{{ token.name }}</p>
           </nuxt-link>
         </li>
       </ul>
@@ -29,6 +29,7 @@ import { Component, Vue } from 'nuxt-property-decorator'
 
 @Component
 export default class Index extends Vue {
+  tokens = this.$config.tokens
   head() {
     return {
       titleTemplate: ''
@@ -39,11 +40,11 @@ export default class Index extends Vue {
 
 <style scoped>
 .container {
-  min-height: calc(100vh - 116px);
+  min-height: calc(100vh - 150px);
   display: flex;
   justify-content: center;
   text-align: center;
-  margin-top: 63px;
+  margin-top: 90px;
 }
 
 .title {

@@ -5,30 +5,34 @@
         <v-btn
           v-if="asset.owner.address !== this.$store.state.address && asset.order"
           small
-          color="primary"
+          color="blue"
+          dark
           @click.stop="executeBuy"
-          >Buy<v-icon small right>add_shopping_cart</v-icon></v-btn
+          >Buy</v-btn
         >
         <v-btn
           v-if="asset.owner.address === this.$store.state.address && asset.order"
           small
-          color="primary"
+          color="blue"
+          dark
           @click.stop="executeCancel"
-          >Cancel<v-icon small right>money_off</v-icon></v-btn
+          >Cancel</v-btn
         >
         <v-btn
           v-if="asset.owner.address === this.$store.state.address && !asset.order"
           small
-          color="primary"
+          color="blue"
+          dark
           @click.stop="sell"
-          >Sell<v-icon small right>attach_money</v-icon></v-btn
+          >Sell</v-btn
         >
         <v-btn
           v-if="asset.owner.address === this.$store.state.address && !asset.order"
           small
-          color="primary"
+          color="blue"
+          dark
           @click.stop="gift"
-          >Gift<v-icon small right>card_giftcard</v-icon></v-btn
+          >Gift</v-btn
         >
         <v-dialog v-model="dialogDisplay" max-width="500">
           <v-card class="pa-3">
@@ -41,10 +45,10 @@
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="primary" flat @click="closeDialog">
+                <v-btn color="blue" outlined @click="closeDialog">
                   Cancel
                 </v-btn>
-                <v-btn color="primary" flat @click="executeGift">
+                <v-btn color="blue" outlined @click="executeGift">
                   Confirm
                 </v-btn>
               </v-card-actions>
@@ -58,10 +62,10 @@
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="primary" flat @click="closeDialog">
+                <v-btn color="blue" outlined @click="closeDialog">
                   Cancel
                 </v-btn>
-                <v-btn color="primary" flat @click="executeSell">
+                <v-btn color="blue" outlined @click="executeSell">
                   Confirm
                 </v-btn>
               </v-card-actions>
@@ -111,7 +115,7 @@
               </v-card-title>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="primary" flat @click="closeDialog">
+                <v-btn color="blue" outlined @click="closeDialog">
                   Close
                 </v-btn>
               </v-card-actions>
@@ -122,7 +126,7 @@
               </v-card-title>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="primary" flat @click="closeDialog">
+                <v-btn color="blue" outlined @click="closeDialog">
                   Close
                 </v-btn>
               </v-card-actions>
@@ -133,7 +137,7 @@
               </v-card-title>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="primary" flat @click="closeDialog">
+                <v-btn color="blue" outlined @click="closeDialog">
                   Close
                 </v-btn>
               </v-card-actions>
@@ -144,7 +148,7 @@
               </v-card-title>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="primary" flat @click="closeDialog">
+                <v-btn color="blue" outlined @click="closeDialog">
                   Close
                 </v-btn>
               </v-card-actions>

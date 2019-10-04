@@ -1,6 +1,5 @@
 <template>
   <v-app class="white">
-    <v-system-bar absolute app height="7px" color="primary"></v-system-bar>
     <Header></Header>
     <nuxt />
     <Footer v-if="this.$route.path === '/' || this.$route.path === '/commercial'"></Footer>
@@ -25,15 +24,6 @@ export default class DefaultLayout extends Vue {}
 a {
   text-decoration: none;
 }
-
-a:link {
-  color: black;
-}
-
-a:visted {
-  color: black;
-}
-
 li {
   list-style: none;
 }

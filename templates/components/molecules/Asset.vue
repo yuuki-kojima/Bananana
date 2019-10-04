@@ -9,18 +9,17 @@
         }
       }"
     >
-      <v-img class="mx-auto" :src="asset.image_url" max-width="300px"
-        ><v-btn v-if="asset.order" color="secondary" class="opacity" small
-          ><v-icon small left>label</v-icon>{{ computePrice(asset.order.takerAssetAmount) }} ETH</v-btn
-        >
-        <!--
-        <a :href="`https://opensea.io/assets/${asset.asset_contract.address}/${asset.token_id}`"
-          ><v-img id="opensea" class="pa-2" :src="opensea"></v-img
-        ></a>
-        -->
+      <v-img class="mx-auto" :src="asset.image_url" max-width="300px">
+        <v-chip class="ma-2 opacity" color="grey darken-4" label text-color="white">
+          <v-icon left>mdi-label</v-icon>
+          Ξ {{ computePrice(asset.order.takerAssetAmount) }}
+        </v-chip>
+        <!-- <v-btn v-if="asset.order" color="grey darken-4" class="opacity" small>
+          {{ computePrice(asset.order.takerAssetAmount) }} ETH
+        </v-btn> -->
       </v-img>
       <v-card-title class="justify-center">
-        <span class="grey--text">{{ asset.name }}</span>
+        <span class="grey--text body-2">{{ asset.name }}</span>
       </v-card-title>
     </nuxt-link>
   </v-card>

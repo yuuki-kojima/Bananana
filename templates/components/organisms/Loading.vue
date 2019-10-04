@@ -1,5 +1,5 @@
 <template>
-  <v-progress-circular class="foo" indeterminate color="primary"></v-progress-circular>
+  <v-progress-circular class="foo" indeterminate color="blue"></v-progress-circular>
 </template>
 
 <style scoped>

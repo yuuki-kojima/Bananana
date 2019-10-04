@@ -1,9 +1,7 @@
 <template>
-  <v-footer class="white">
-    <v-flex text-xs-center class="flex">
-      <nuxt-link to="/commercial">特定商取引法に基づく表記</nuxt-link>
-      <span class="ml-3">&copy;2019 Bananana powerd by Satellites</span>
-    </v-flex>
+  <v-footer class="white d-flex flex-column align-center">
+    <nuxt-link to="/commercial">特定商取引法に基づく表記</nuxt-link>
+    <span class="ml-3">&copy;2019 Bananana powerd by Satellites</span>
   </v-footer>
 </template>
 
@@ -17,10 +15,5 @@ export default class Footer extends Vue {}
 a {
   text-decoration: none;
   color: gray;
-}
-
-.flex {
-  display: flex;
-  flex-direction: column;
 }
 </style>

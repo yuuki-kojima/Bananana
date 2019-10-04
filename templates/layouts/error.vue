@@ -6,7 +6,7 @@
       </v-card-title>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn color="primary" flat @click="reload">
+        <v-btn color="blue" dark flat @click="reload">
           Reload
         </v-btn>
       </v-card-actions>

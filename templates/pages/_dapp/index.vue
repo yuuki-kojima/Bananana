@@ -3,7 +3,7 @@
     <v-container>
       <Loading v-if="loading"></Loading>
       <Filters
-        v-if="assets"
+        v-if="assets && !loading"
         :sort-filters="sortFilters"
         :dapp-filters="dappFilters"
         :update-filter-state="updateFilterState"
@@ -56,9 +56,10 @@ export default class Index extends Vue {
 
   setInitialFilterState() {
     const filters = [...this.dappFilters, ...this.sortFilters]
-    this.filterState = filters.map((filter) => {
+    const filterState = filters.map((filter) => {
       return { key: filter.key.value, value: filter.initialOption.value }
     })
+    this.filterState = filterState
   }
 
   updateFilterState(payload) {
