@@ -3,12 +3,12 @@
     <v-container>
       <Loading v-if="loading"></Loading>
       <Filters
-        v-if="assets && !loading"
+        v-if="assets.length > 0 && !loading"
         :sort-filters="sortFilters"
         :dapp-filters="dappFilters"
         :update-filter-state="updateFilterState"
       ></Filters>
-      <Assets v-if="assets" :loading="loading" :assets="filteredAssets"></Assets>
+      <Assets v-if="assets && !loading" :assets="filteredAssets"></Assets>
     </v-container>
   </v-content>
 </template>
@@ -43,15 +43,18 @@ export default class Index extends Vue {
   async mounted() {
     // Initialize Order
     const dappName = this.$route.params.dapp
+    const token = this.$config.tokens[dappName]
     let contractAddress
-    if (dappName) {
-      contractAddress = [this.$config.tokens[dappName].contract]
+    if (token) {
+      contractAddress = [token.contract]
+      await this.updateOrders(contractAddress)
+      // Set Filter Item
+      this.sortFilters = this.$constant.commonFilter
+      this.dappFilters = this.$config.tokens[dappName].filters
+      this.setInitialFilterState()
+    } else {
+      this.$router.push('/')
     }
-    await this.updateOrders(contractAddress)
-    // Set Filter Item
-    this.sortFilters = this.$constant.commonFilter
-    this.dappFilters = this.$config.tokens[this.$route.params.dapp].filters
-    this.setInitialFilterState()
   }
 
   setInitialFilterState() {

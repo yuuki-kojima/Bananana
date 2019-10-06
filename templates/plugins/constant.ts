@@ -1,4 +1,7 @@
-import cryptospellsElement from '../dapps/cryptospells'
+import cryptospellsElement from '@/dapps/cryptospells'
+import mycryptoheroesHeroElement from '@/dapps/mycryptoheroes-hero'
+import mycryptoheroesExElement from '@/dapps/mycryptoheroes-ex'
+import mycryptoheroesLandElement from '@/dapps/mycryptoheroes-land'
 
 interface DappsObj {
   contract: string
@@ -10,7 +13,10 @@ interface DappsObj {
 }
 
 const dapps: { [dappName: string]: DappsObj } = {
-  cryptospells: cryptospellsElement
+  cryptospells: cryptospellsElement,
+  'mycryptoheroes-hero': mycryptoheroesHeroElement,
+  'mycryptoheroes-ex': mycryptoheroesExElement,
+  'mycryptoheroes-land': mycryptoheroesLandElement
 }
 
 const dappsDev: { [dappName: string]: DappsObj } = {

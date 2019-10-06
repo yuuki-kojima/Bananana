@@ -1,6 +1,6 @@
 <template>
   <p class="text-center">
-    There is no asset. This site currently only supports "Cryptospells".
+    There is no order or there is no asset supported by Bananana.
   </p>
 </template>
 

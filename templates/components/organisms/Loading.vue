@@ -2,6 +2,11 @@
   <v-progress-circular class="foo" indeterminate color="blue"></v-progress-circular>
 </template>
 
+<script lang="ts">
+import { Vue } from 'vue-property-decorator'
+export default class Loading extends Vue {}
+</script>
+
 <style scoped>
 .foo {
   position: absolute;

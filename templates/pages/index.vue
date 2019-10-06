@@ -68,7 +68,6 @@ ul {
 
 .dapps .flex {
   display: flex;
-  justify-content: center;
   align-items: center;
 }
 
