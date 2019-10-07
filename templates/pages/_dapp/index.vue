@@ -3,12 +3,12 @@
     <v-container>
       <Loading v-if="loading"></Loading>
       <Filters
-        v-if="assets"
+        v-if="assets.length > 0 && !loading"
         :sort-filters="sortFilters"
         :dapp-filters="dappFilters"
         :update-filter-state="updateFilterState"
       ></Filters>
-      <Assets v-if="assets" :loading="loading" :assets="filteredAssets"></Assets>
+      <Assets v-if="assets && !loading" :assets="filteredAssets"></Assets>
     </v-container>
   </v-content>
 </template>
