@@ -14,7 +14,7 @@
         <li v-for="token in tokens" :key="token.contract">
           <nuxt-link class="flex" :to="`/${token.url}`">
             <div class="dapp-logo mr-3">
-              <img :src="token.avatar" width="100%" />
+              <img :src="token.avatar" width="70%" />
             </div>
             <p class="dapp-name black--text" light>{{ token.name }}</p>
           </nuxt-link>
@@ -76,6 +76,6 @@ ul {
 }
 
 .dapp-name {
-  font-size: 30px;
+  font-size: 20px;
 }
 </style>
