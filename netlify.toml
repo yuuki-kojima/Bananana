@@ -1,6 +1,7 @@
 
 [build]
-  publish = "templates/dist"
+  base = "templates"
+  publish = "dist"
   command = "npm run generate"
 
 [[redirects]]
