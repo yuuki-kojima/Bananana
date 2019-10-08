@@ -1,3 +1,5 @@
+// import assetView from '@/components/molecules/assets/CryptoSpells.vue'
+
 const dappElement = {
   contract: '0x67cbbb366a51fff9ad869d027e496ba49f5f6d55',
   symbol: 'CSPL',
@@ -44,6 +46,7 @@ const dappElement = {
       ]
     }
   ]
+  // assetView: assetView
 }
 
 export default dappElement

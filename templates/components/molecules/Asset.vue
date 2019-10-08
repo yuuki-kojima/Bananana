@@ -1,58 +1,23 @@
 <template>
-  <v-card v-if="asset" flat>
-    <nuxt-link
-      :to="{
-        name: 'asset',
-        query: {
-          address: asset.asset_contract.address,
-          id: asset.token_id
-        }
-      }"
-    >
-      <v-img class="mx-auto" :src="asset.image_url" max-width="300px"
-        ><v-btn v-if="asset.order" color="secondary" class="opacity" small
-          ><v-icon small left>label</v-icon>{{ computePrice(asset.order.takerAssetAmount) }} ETH</v-btn
-        >
-        <!--
-        <a :href="`https://opensea.io/assets/${asset.asset_contract.address}/${asset.token_id}`"
-          ><v-img id="opensea" class="pa-2" :src="opensea"></v-img
-        ></a>
-        -->
-      </v-img>
-      <v-card-title class="justify-center">
-        <span class="grey--text">{{ asset.name }}</span>
-      </v-card-title>
-    </nuxt-link>
-  </v-card>
+  <component :is="assetView" :asset="asset"></component>
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator'
-//  const opensea = require('~/assets/img/opensea-logomark-flat-colored-blue.png')
 
 @Component
 export default class Asset extends Vue {
   @Prop() asset
-  //  opensea = opensea
-  computePrice(price) {
-    const feeRatio = this.$config.defaultRatio / this.$config.feeBase
-    const fee = price.times(feeRatio)
-    const amount = price.plus(fee)
-    return this.$web3.utils.fromWei(amount.toString())
+  assetView = null
+  mounted() {
+    const address = this.asset.asset_contract.address
+    this.contractAddressToAssetView(address)
+  }
+  contractAddressToAssetView(address: string) {
+    const token = this.$config.tokens.find((token) => token.contract === address)
+    const assetViewComponent = token.assetView ? token.assetView : this.$constant.commonView
+    this.assetView = assetViewComponent
+    // console.log(assetViewComponent)
   }
 }
 </script>
-
-<style scoped>
-.opacity {
-  opacity: 0.85;
-}
-
-/*
-#opensea {
-  position: absolute;
-  bottom: 1%;
-  right: 1%;
-}
-*/
-</style>

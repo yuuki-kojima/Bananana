@@ -37,4 +37,7 @@ a:visted {
 li {
   list-style: none;
 }
+.application--wrap {
+  background-color: #f9f9f9;
+}
 </style>

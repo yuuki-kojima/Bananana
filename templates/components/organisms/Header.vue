@@ -1,5 +1,5 @@
 <template>
-  <v-toolbar absolute flat clipped-left app class="white">
+  <v-toolbar absolute clipped-left app class="white">
     <nuxt-link :to="`/`"><v-btn flat color="primary">Bananana</v-btn></nuxt-link>
     <v-spacer></v-spacer>
     <v-toolbar-items>

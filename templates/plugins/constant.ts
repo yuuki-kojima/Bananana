@@ -2,6 +2,7 @@ import cryptospellsElement from '@/dapps/cryptospells'
 import mycryptoheroesHeroElement from '@/dapps/mycryptoheroes-hero'
 import mycryptoheroesExElement from '@/dapps/mycryptoheroes-ex'
 import mycryptoheroesLandElement from '@/dapps/mycryptoheroes-land'
+import commonViewLayout from '@/components/molecules/assets/Common.vue'
 
 interface DappsObj {
   contract: string
@@ -12,22 +13,22 @@ interface DappsObj {
   filters: object
 }
 
-const dapps: { [dappName: string]: DappsObj } = {
-  cryptospells: cryptospellsElement,
-  'mycryptoheroes-hero': mycryptoheroesHeroElement,
-  'mycryptoheroes-ex': mycryptoheroesExElement,
-  'mycryptoheroes-land': mycryptoheroesLandElement
-}
+const dapps: DappsObj[] = [
+  cryptospellsElement,
+  mycryptoheroesHeroElement,
+  mycryptoheroesExElement,
+  mycryptoheroesLandElement
+]
 
-const dappsDev: { [dappName: string]: DappsObj } = {
-  bbb: {
+const dappsDev: DappsObj[] = [
+  {
     contract: '0x84f6261350151dc9cbf5b33c5354fe9a82166e26',
     symbol: 'BBB',
     name: 'BB Batch',
     url: 'bbb',
     filters: {}
   }
-}
+]
 
 const commonFilter = [
   {
@@ -41,8 +42,11 @@ const commonFilter = [
   }
 ]
 
+const commonView = commonViewLayout
+
 export const constant = {
   dapps: dapps,
   dappsDev: dappsDev,
-  commonFilter: commonFilter
+  commonFilter: commonFilter,
+  commonView: commonView
 }
