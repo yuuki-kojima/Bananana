@@ -44,14 +44,17 @@ export default class Index extends Vue {
     // Initialize Order
     const dappName = this.$route.params.dapp
     let contractAddress
-    if (dappName) {
-      contractAddress = [this.$config.tokens[dappName].contract]
+    const token = this.$config.tokens.find((token) => token.url === dappName)
+    if (token) {
+      contractAddress = [token.contract]
+      await this.updateOrders(contractAddress)
+      // Set Filter Item
+      this.sortFilters = this.$constant.commonFilter
+      this.dappFilters = token.filters
+      this.setInitialFilterState()
+    } else {
+      this.$router.push('/')
     }
-    await this.updateOrders(contractAddress)
-    // Set Filter Item
-    this.sortFilters = this.$constant.commonFilter
-    this.dappFilters = this.$config.tokens[this.$route.params.dapp].filters
-    this.setInitialFilterState()
   }
 
   setInitialFilterState() {

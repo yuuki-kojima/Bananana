@@ -1,5 +1,5 @@
 <template>
-  <v-card flat>
+  <v-card flat class="mt-2">
     <v-layout row justify-center>
       <v-card-actions class="justify-center">
         <v-btn

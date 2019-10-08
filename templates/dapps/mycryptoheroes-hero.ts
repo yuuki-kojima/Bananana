@@ -1,3 +1,5 @@
+import assetView from '@/components/molecules/assets/Mycryptoheroes.vue'
+
 const dappElement = {
   contract: '0x273f7f8e6489682df756151f5525576e322d51a3',
   symbol: 'MCHH',
@@ -16,7 +18,8 @@ const dappElement = {
         { text: 'Legendary', value: 'Legendary' }
       ]
     }
-  ]
+  ],
+  assetView: assetView
 }
 
 export default dappElement
