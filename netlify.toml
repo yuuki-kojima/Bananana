@@ -1,6 +1,5 @@
 
 [build]
-  base = "templates"
   publish = "templates/dist"
   command = "npm run generate"
 
