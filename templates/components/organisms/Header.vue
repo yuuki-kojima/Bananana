@@ -1,6 +1,10 @@
 <template>
   <v-toolbar absolute clipped-left app class="white">
-    <nuxt-link :to="`/`"><v-btn flat color="primary">Bananana</v-btn></nuxt-link>
+    <v-toolbar-title class="title">
+      <nuxt-link to="/">
+        Bananana
+      </nuxt-link>
+    </v-toolbar-title>
     <v-spacer></v-spacer>
     <v-toolbar-items>
       <v-btn v-if="this.$store.state.address" flat color="primary" to="/mypage">

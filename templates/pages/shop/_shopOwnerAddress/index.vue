@@ -46,7 +46,7 @@ export default class Index extends Vue {
         }
       }
     })
-    this.assets = onsaleShopOwnerAssets
+    this.assets = this.$utils.setAssetsMeta(onsaleShopOwnerAssets)
     this.buildText(this.assets)
     this.shopOwner = this.isShopOwner()
     this.loading = false
@@ -72,16 +72,10 @@ export default class Index extends Vue {
   buildText(assets) {
     let text = ''
     assets.map((asset) => {
-      text += `\n出）${asset.name}\n求）${this.computePrice(asset.order.takerAssetAmount)}ETH\n`
+      text += `\n出）${asset.name}\n求）${this.$utils.computePrice(asset.order.takerAssetAmount)}ETH\n`
     })
+    text += `\nhttps://bananana.io${this.$route.path}`
     this.forTradeComunityText = text
-  }
-
-  computePrice(price) {
-    const feeRatio = this.$config.defaultRatio / this.$config.feeBase
-    const fee = price.times(feeRatio)
-    const amount = price.plus(fee)
-    return this.$web3.utils.fromWei(amount.toString())
   }
 }
 </script>

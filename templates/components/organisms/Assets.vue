@@ -12,12 +12,10 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator'
 import Asset from '~/components/molecules/Asset.vue'
-import NoAssets from '~/components/molecules/NoAssets.vue'
 
 @Component({
   components: {
-    Asset,
-    NoAssets
+    Asset
   }
 })
 export default class Assets extends Vue {

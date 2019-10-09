@@ -1,5 +1,21 @@
 import assetView from '@/components/molecules/assets/Mycryptoheroes.vue'
 
+const setAssetMeta = (asset) => {
+  return {
+    price: asset.order ? asset.order.takerAssetAmount : null,
+    image: asset.image_url,
+    address: asset.asset_contract.address,
+    tokenId: asset.token_id,
+    order: asset.order && asset.order,
+    rarity: asset.traits.find((trait) => trait.trait_type === 'rarity').value,
+    level: asset.traits.find((trait) => trait.trait_type === 'lv').value,
+    name: asset.description
+      .replace('ExtensionName: ', '')
+      .replace(/Nickname:.*/, '')
+      .trim()
+  }
+}
+
 const dappElement = {
   contract: '0xdceaf1652a131f32a821468dc03a92df0edd86ea',
   symbol: 'MCHE',
@@ -20,7 +36,8 @@ const dappElement = {
       ]
     }
   ],
-  assetView: assetView
+  assetView: assetView,
+  setAssetMeta: setAssetMeta
 }
 
 export default dappElement

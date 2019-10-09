@@ -37,7 +37,7 @@ export default class Index extends Vue {
         }
       }
     }
-    this.assets = assets
+    this.assets = this.$utils.setAssetsMeta(assets)
     this.loading = false
   }
   async getAssetDataForOwner(owner: string) {

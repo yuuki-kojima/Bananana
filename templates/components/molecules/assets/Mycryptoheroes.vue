@@ -4,23 +4,23 @@
       :to="{
         name: 'asset',
         query: {
-          address: asset.asset_contract.address,
-          id: asset.token_id
+          address: asset.address,
+          id: asset.tokenId
         }
       }"
     >
       <v-layout column style="height: 100%;">
         <div class="asset-meta">
-          <p class="rarity">{{ rarity }}</p>
-          <p class="lv">lv {{ lv }}</p>
+          <p class="rarity">{{ asset.rarity }}</p>
+          <p class="lv">lv {{ asset.level }}</p>
         </div>
-        <div class="image pb-2"><v-img class="mx-auto" :src="asset.image_url" max-width="300px"></v-img></div>
+        <div class="image pb-2"><v-img class="mx-auto" :src="asset.image" max-width="300px"></v-img></div>
         <div class="asset-main">
           <div>
-            <p>{{ name }}</p>
-            <p class="token-id grey--text">#{{ asset.name.replace(/.*#/, '').replace(/Lv.*/, '') }}</p>
+            <p>{{ asset.name }}</p>
+            <p class="token-id grey--text">#{{ asset.tokenId }}</p>
           </div>
-          <p v-if="asset.order" class="price">Ξ {{ computePrice(asset.order.takerAssetAmount) }}</p>
+          <p v-if="asset.order" class="price">Ξ {{ this.$utils.computePrice(asset.price) }}</p>
         </div>
       </v-layout>
     </nuxt-link>
@@ -31,20 +31,8 @@
 import { Component, Prop, Vue } from 'vue-property-decorator'
 
 @Component
-export default class Common extends Vue {
+export default class MyCryptoheroes extends Vue {
   @Prop() asset
-  rarity = this.asset.traits.find((trait) => trait.trait_type === 'rarity').value
-  lv = this.asset.traits.find((trait) => trait.trait_type === 'lv').value
-  name = this.asset.description
-    .replace('ExtensionName: ', '')
-    .replace('HeroName: ', '')
-    .replace(/Nickname:.*/, '')
-  computePrice(price) {
-    const feeRatio = this.$config.defaultRatio / this.$config.feeBase
-    const fee = price.times(feeRatio)
-    const amount = price.plus(fee)
-    return this.$web3.utils.fromWei(amount.toString())
-  }
 }
 </script>
 

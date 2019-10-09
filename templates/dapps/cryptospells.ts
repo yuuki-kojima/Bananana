@@ -1,4 +1,27 @@
-// import assetView from '@/components/molecules/assets/CryptoSpells.vue'
+import assetView from '@/components/molecules/assets/CryptoSpells.vue'
+
+const setAssetMeta = (asset) => {
+  return {
+    price: asset.order ? asset.order.takerAssetAmount : null,
+    image: asset.image_url,
+    address: asset.asset_contract.address,
+    tokenId: asset.token_id,
+    order: asset.order && asset.order,
+    level:
+      asset.traits.find((trait) => trait.trait_type === 'level') &&
+      asset.traits.find((trait) => trait.trait_type === 'level').value,
+    color:
+      asset.traits.find((trait) => trait.trait_type === 'color') &&
+      asset.traits.find((trait) => trait.trait_type === 'color').value,
+    cost:
+      asset.traits.find((trait) => trait.trait_type === 'cost') &&
+      asset.traits.find((trait) => trait.trait_type === 'cost').value,
+    rarity:
+      asset.traits.find((trait) => trait.trait_type === 'cost') &&
+      asset.traits.find((trait) => trait.trait_type === 'rarity').value,
+    name: asset.name.replace(/#.*/, '').trim()
+  }
+}
 
 const dappElement = {
   contract: '0x67cbbb366a51fff9ad869d027e496ba49f5f6d55',
@@ -45,8 +68,9 @@ const dappElement = {
         { text: '9+', value: '9+' }
       ]
     }
-  ]
-  // assetView: assetView
+  ],
+  assetView: assetView,
+  setAssetMeta
 }
 
 export default dappElement
