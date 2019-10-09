@@ -6,6 +6,9 @@
       <v-btn v-if="this.$store.state.address" flat color="primary" to="/mypage">
         MyPage
       </v-btn>
+      <v-btn v-if="this.$store.state.address" flat color="primary" :to="`/shop/${this.$store.state.address}`">
+        MyShop
+      </v-btn>
       <v-menu offset-y>
         <template v-slot:activator="{ on }">
           <v-btn flat color="primary" v-on="on">
