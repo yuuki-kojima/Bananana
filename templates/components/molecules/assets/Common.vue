@@ -12,7 +12,10 @@
       <v-layout column style="height: 100%;">
         <div class="pb-2"><v-img class="mx-auto" :src="asset.image" max-width="300px"></v-img></div>
         <div class="asset-main">
-          <p class="name">{{ asset.name }}</p>
+          <div class="asset-main-left">
+            <p>{{ asset.name }}</p>
+            <p class="token-id grey--text">#{{ asset.tokenId }}</p>
+          </div>
           <p v-if="asset.order" class="price">Ξ {{ this.$utils.computePrice(asset.price) }}</p>
         </div>
       </v-layout>
@@ -40,6 +43,9 @@ p {
   justify-content: space-between;
   align-items: center;
   flex: 1;
+}
+.asset-main-left {
+  width: 65%;
 }
 .name {
   width: 65%;

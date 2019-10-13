@@ -12,7 +12,8 @@ const setAssetMeta = (asset) => {
     name: asset.description
       .replace('HeroName: ', '')
       .replace(/Nickname:.*/, '')
-      .trim()
+      .trim(),
+    ownerAddress: asset.owner.address
   }
 }
 

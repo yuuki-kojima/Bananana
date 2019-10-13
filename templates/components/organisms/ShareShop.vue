@@ -11,7 +11,7 @@
       </div>
     </template>
     <v-card class="pa-3" style="position: relative">
-      <v-snackbar v-model="snackbar" color="info" class="ma-2 text-center" timeout="2000" absolute top>
+      <v-snackbar v-model="snackbar" color="info" class="ma-2 text-center" :timeout="timeout" absolute top>
         Copied
       </v-snackbar>
       <v-textarea v-if="shopOwner" :value="shareText" rows="15"></v-textarea>
@@ -37,6 +37,7 @@ export default class ShareShop extends Vue {
   @Prop() shareText
   dialog = false
   snackbar = false
+  timeout = 2000
 
   execCopy() {
     const textarea = document.getElementsByTagName('textarea')[0]

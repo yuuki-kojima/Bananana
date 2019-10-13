@@ -26,7 +26,7 @@ const dappsDev: DappsObj[] = [
     symbol: 'BBB',
     name: 'BB Batch',
     url: 'bbb',
-    filters: {}
+    filters: []
   }
 ]
 
@@ -49,7 +49,8 @@ const setAssetMeta = (asset) => {
     image: asset.image_url,
     address: asset.asset_contract.address,
     tokenId: asset.token_id,
-    order: asset.order && asset.order
+    order: asset.order && asset.order,
+    ownerAddress: asset.owner.address
   }
 }
 

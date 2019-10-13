@@ -19,7 +19,8 @@ const setAssetMeta = (asset) => {
     rarity:
       asset.traits.find((trait) => trait.trait_type === 'cost') &&
       asset.traits.find((trait) => trait.trait_type === 'rarity').value,
-    name: asset.name.replace(/#.*/, '').trim()
+    name: asset.name.replace(/#.*/, '').trim(),
+    ownerAddress: asset.owner.address
   }
 }
 
