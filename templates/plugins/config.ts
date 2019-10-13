@@ -29,7 +29,7 @@ const networkIdToAPI: { [networkId: number]: string } = {
   4: `https://rinkeby-api.opensea.io/api/v1/`
 }
 
-const networkIdToTokens: { [networkId: number]: object } = {
+const networkIdToTokens: { [networkId: number]: any } = {
   1: constant.dapps,
   4: constant.dappsDev
 }

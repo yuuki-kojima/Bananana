@@ -4,7 +4,7 @@ const Web3 = require('web3')
 
 const setAssetsMeta = (assets) => {
   return assets.map((asset) => {
-    let assetMeta = null
+    let assetMeta: any = null
     const address = asset.asset_contract.address
     const token = config.tokens.find((token) => token.contract === address)
     token.setAssetMeta ? (assetMeta = token.setAssetMeta(asset)) : (assetMeta = constant.setAssetMeta(asset))
