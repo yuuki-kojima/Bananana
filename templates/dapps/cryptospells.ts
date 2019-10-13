@@ -1,4 +1,4 @@
-import assetView from '@/components/molecules/assets/CryptoSpells.vue'
+import assetView from '@/components/molecules/assets/Cryptospells.vue'
 
 const setAssetMeta = (asset) => {
   return {
