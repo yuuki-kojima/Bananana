@@ -24,7 +24,7 @@ import ShareShop from '~/components/organisms/ShareShop.vue'
 export default class Index extends Vue {
   head() {
     return {
-      title: 'Mypage',
+      title: 'Shop',
       titleTemplate: '%s | Bananana'
     }
   }
