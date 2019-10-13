@@ -2,7 +2,7 @@
   <v-dialog v-model="dialog" max-width="600px">
     <template v-slot:activator="{ on }">
       <div class="d-flex align-center justify-center" align="center">
-        <v-flex xs6 md2>
+        <v-flex v-if="shopOwner" xs6 md2>
           <v-btn outlined color="primary" dark xs6 md2 v-on="on">Share Text</v-btn>
         </v-flex>
         <v-flex xs6 md2>
