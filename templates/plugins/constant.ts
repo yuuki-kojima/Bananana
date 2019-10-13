@@ -26,7 +26,7 @@ const dappsDev: DappsObj[] = [
     symbol: 'BBB',
     name: 'BB Batch',
     url: 'bbb',
-    filters: {}
+    filters: []
   }
 ]
 
@@ -42,11 +42,24 @@ const commonFilter = [
   }
 ]
 
+const setAssetMeta = (asset) => {
+  return {
+    name: asset.name,
+    price: asset.order ? asset.order.takerAssetAmount : null,
+    image: asset.image_url,
+    address: asset.asset_contract.address,
+    tokenId: asset.token_id,
+    order: asset.order && asset.order,
+    ownerAddress: asset.owner.address
+  }
+}
+
 const commonView = commonViewLayout
 
 export const constant = {
   dapps: dapps,
   dappsDev: dappsDev,
   commonFilter: commonFilter,
-  commonView: commonView
+  commonView: commonView,
+  setAssetMeta: setAssetMeta
 }

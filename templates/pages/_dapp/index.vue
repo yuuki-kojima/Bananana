@@ -83,10 +83,10 @@ export default class Index extends Vue {
           let result
           switch (otherOption.value) {
             case 'lowest':
-              result = a.order.takerAssetAmount.c[0] < b.order.takerAssetAmount.c[0] ? -1 : 1
+              result = a.price.c[0] < b.price.c[0] ? -1 : 1
               break
             case 'highest':
-              result = a.order.takerAssetAmount.c[0] < b.order.takerAssetAmount.c[0] ? 1 : -1
+              result = a.price.c[0] < b.price.c[0] ? 1 : -1
               break
             default:
               break
@@ -97,13 +97,12 @@ export default class Index extends Vue {
     const filteredAssets = sortedAssets.filter((asset) => {
       const state = this.filterState.map((state) => {
         if (state.key !== 'sort' && state.value !== 'all') {
-          const traits = asset.traits.filter((trait) => trait.trait_type === state.key)
-          if (traits.length > 0) {
+          if (asset[state.key]) {
             if (this.hasPlusString(state.value)) {
               const num = Number(state.value.replace('+', ''))
-              return traits[0].value >= num
+              return asset[state.key] >= num
             } else {
-              return traits[0].value === state.value
+              return asset[state.key] === state.value
             }
           } else {
             return false
@@ -125,8 +124,9 @@ export default class Index extends Vue {
     this.loading = true
     const refinedOrders = await this.$satellites.getOrders(contractAddress)
     const assets = await this.getAssetDataForOrders(refinedOrders, contractAddress)
-    this.assets = assets
-    this.filteredAssets = assets
+    const shapedAssets = this.$utils.setAssetsMeta(assets)
+    this.assets = shapedAssets
+    this.filteredAssets = shapedAssets
     this.loading = false
   }
 

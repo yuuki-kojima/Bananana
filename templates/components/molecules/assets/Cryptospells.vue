@@ -4,21 +4,19 @@
       :to="{
         name: 'asset',
         query: {
-          address: asset.asset_contract.address,
-          id: asset.token_id
+          address: asset.address,
+          id: asset.tokenId
         }
       }"
     >
-      <v-layout column>
-        <div class="asset-meta">
-          <p class="rarity">{{ rarity }}</p>
-          <p class="lv">lv {{ lv }}</p>
-        </div>
-        <div class="image pb-2"><v-img class="mx-auto" :src="asset.image_url" max-width="300px"></v-img></div>
+      <v-layout column style="height: 100%;">
+        <div class="image pb-2"><v-img class="mx-auto" :src="asset.image" max-width="300px"></v-img></div>
         <div class="asset-main">
-          <p>{{ name }}</p>
-          <p class="token-id grey--text">#{{ asset.name.replace(/.*#/, '') }}</p>
-          <p v-if="asset.order">Ξ {{ computePrice(asset.order.takerAssetAmount) }}</p>
+          <div class="asset-main-left">
+            <p>{{ asset.name }}</p>
+            <p class="token-id grey--text">#{{ asset.tokenId }}</p>
+          </div>
+          <p v-if="asset.order" class="price">Ξ {{ this.$utils.computePrice(asset.price) }}</p>
         </div>
       </v-layout>
     </nuxt-link>
@@ -29,20 +27,8 @@
 import { Component, Prop, Vue } from 'vue-property-decorator'
 
 @Component
-export default class Common extends Vue {
+export default class Cryptospells extends Vue {
   @Prop() asset
-  rarity = this.asset.traits.find((trait) => trait.trait_type === 'rarity').value
-  lv = this.asset.traits.find((trait) => trait.trait_type === 'level').value
-  name = this.asset.name.replace(/#.*/, '')
-  mounted() {
-    console.log(this.asset)
-  }
-  computePrice(price) {
-    const feeRatio = this.$config.defaultRatio / this.$config.feeBase
-    const fee = price.times(feeRatio)
-    const amount = price.plus(fee)
-    return this.$web3.utils.fromWei(amount.toString())
-  }
 }
 </script>
 
@@ -59,9 +45,19 @@ p {
   justify-content: space-between;
 }
 .asset-main {
-  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex: 1;
+}
+.asset-main-left {
+  width: 65%;
+}
+.price {
+  font-weight: bold;
+  font-size: 15px;
 }
 .card {
-  box-sizing: border-box;
+  height: calc(100% - 16px);
 }
 </style>

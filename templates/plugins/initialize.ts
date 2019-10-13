@@ -2,6 +2,7 @@
 import Satellites from 'satellites.js'
 import { config } from './config'
 import { constant } from './constant'
+import { utils } from './utils'
 const Web3 = require('web3')
 
 export default async function({ store, isServer }, inject) {
@@ -11,6 +12,7 @@ export default async function({ store, isServer }, inject) {
 
   inject('config', config)
   inject('constant', constant)
+  inject('utils', utils)
 
   const web3 = (window as any).web3
   const ethereum = (window as any).ethereum

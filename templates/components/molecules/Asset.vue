@@ -10,14 +10,13 @@ export default class Asset extends Vue {
   @Prop() asset
   assetView = null
   mounted() {
-    const address = this.asset.asset_contract.address
+    const address = this.asset.address
     this.contractAddressToAssetView(address)
   }
   contractAddressToAssetView(address: string) {
     const token = this.$config.tokens.find((token) => token.contract === address)
     const assetViewComponent = token.assetView ? token.assetView : this.$constant.commonView
     this.assetView = assetViewComponent
-    // console.log(assetViewComponent)
   }
 }
 </script>

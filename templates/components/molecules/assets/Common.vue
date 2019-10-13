@@ -4,16 +4,19 @@
       :to="{
         name: 'asset',
         query: {
-          address: asset.asset_contract.address,
-          id: asset.token_id
+          address: asset.address,
+          id: asset.tokenId
         }
       }"
     >
       <v-layout column style="height: 100%;">
-        <div class="pb-2"><v-img class="mx-auto" :src="asset.image_url" max-width="300px"></v-img></div>
+        <div class="pb-2"><v-img class="mx-auto" :src="asset.image" max-width="300px"></v-img></div>
         <div class="asset-main">
-          <p class="name">{{ asset.name }}</p>
-          <p v-if="asset.order" class="price">Ξ {{ computePrice(asset.order.takerAssetAmount) }}</p>
+          <div class="asset-main-left">
+            <p>{{ asset.name }}</p>
+            <p class="token-id grey--text">#{{ asset.tokenId }}</p>
+          </div>
+          <p v-if="asset.order" class="price">Ξ {{ this.$utils.computePrice(asset.price) }}</p>
         </div>
       </v-layout>
     </nuxt-link>
@@ -27,12 +30,6 @@ import { Component, Prop, Vue } from 'vue-property-decorator'
 @Component
 export default class Common extends Vue {
   @Prop() asset
-  computePrice(price) {
-    const feeRatio = this.$config.defaultRatio / this.$config.feeBase
-    const fee = price.times(feeRatio)
-    const amount = price.plus(fee)
-    return this.$web3.utils.fromWei(amount.toString())
-  }
 }
 </script>
 
@@ -47,8 +44,11 @@ p {
   align-items: center;
   flex: 1;
 }
+.asset-main-left {
+  width: 65%;
+}
 .name {
-  width: 70%;
+  width: 65%;
 }
 .price {
   font-weight: bold;

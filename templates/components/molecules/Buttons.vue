@@ -3,28 +3,28 @@
     <v-layout row justify-center>
       <v-card-actions class="justify-center">
         <v-btn
-          v-if="asset.owner.address !== this.$store.state.address && asset.order"
+          v-if="asset.ownerAddress !== this.$store.state.address && asset.order"
           small
           color="primary"
           @click.stop="executeBuy"
           >Buy<v-icon small right>add_shopping_cart</v-icon></v-btn
         >
         <v-btn
-          v-if="asset.owner.address === this.$store.state.address && asset.order"
+          v-if="asset.ownerAddress === this.$store.state.address && asset.order"
           small
           color="primary"
           @click.stop="executeCancel"
           >Cancel<v-icon small right>money_off</v-icon></v-btn
         >
         <v-btn
-          v-if="asset.owner.address === this.$store.state.address && !asset.order"
+          v-if="asset.ownerAddress === this.$store.state.address && !asset.order"
           small
           color="primary"
           @click.stop="sell"
           >Sell<v-icon small right>attach_money</v-icon></v-btn
         >
         <v-btn
-          v-if="asset.owner.address === this.$store.state.address && !asset.order"
+          v-if="asset.ownerAddress === this.$store.state.address && !asset.order"
           small
           color="primary"
           @click.stop="gift"
@@ -185,10 +185,10 @@ export default class Buttons extends Vue {
   async executeGift() {
     this.openDialog(4)
     const txhash = await this.$satellites.gift(
-      this.asset.asset_contract.address,
+      this.asset.address,
       this.giftToAddress,
       this.$store.state.address,
-      this.asset.token_id
+      this.asset.tokenId
     )
     this.etherscan = `${this.$config.etherscan}${txhash}`
     await this.$satellites.web3Wrapper.awaitTransactionSuccessAsync(txhash)
@@ -197,7 +197,7 @@ export default class Buttons extends Vue {
   }
   async sell() {
     const approved = await this.$satellites.erc721Token.isApprovedForAllAsync(
-      this.asset.asset_contract.address,
+      this.asset.address,
       this.$store.state.address,
       this.$satellites.contractAddresses.erc721Proxy
     )
@@ -212,8 +212,8 @@ export default class Buttons extends Vue {
     this.openDialog(5)
     await this.$satellites.sell(
       this.$store.state.address,
-      this.asset.asset_contract.address,
-      this.asset.token_id,
+      this.asset.address,
+      this.asset.tokenId,
       this.takerAssetAmount
     )
     await this.updateAsset()
@@ -223,7 +223,7 @@ export default class Buttons extends Vue {
   async executeApprove() {
     this.openDialog(3)
     const txhash = await this.$satellites.erc721Token.setApprovalForAllAsync(
-      this.asset.asset_contract.address,
+      this.asset.address,
       this.$store.state.address,
       this.$satellites.contractAddresses.erc721Proxy,
       true

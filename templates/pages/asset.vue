@@ -39,7 +39,8 @@ export default class Index extends Vue {
     const asset = await this.getAssetData(assetContractAddress, tokenId)
     const order = await this.$satellites.getOrder(assetContractAddress, tokenId)
     asset.order = order
-    this.asset = asset
+    const shapedAssets = this.$utils.setAssetsMeta([asset])
+    this.asset = shapedAssets[0]
     this.loading = false
   }
 
