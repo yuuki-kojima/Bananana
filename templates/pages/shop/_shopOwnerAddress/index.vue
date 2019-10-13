@@ -2,9 +2,8 @@
   <v-content>
     <v-container>
       <Loading v-if="loading"></Loading>
-      <TwitterButton v-if="assets"></TwitterButton>
+      <ShareShop v-if="assets" :shop-owner="shopOwner" :share-text="shareText"></ShareShop>
       <Assets v-if="assets" :assets="assets"></Assets>
-      <v-textarea v-if="assets && shopOwner" label="For Trade Comunity" :value="forTradeComunityText"></v-textarea>
     </v-container>
   </v-content>
 </template>
@@ -13,13 +12,13 @@
 import { Component, Vue } from 'nuxt-property-decorator'
 import Assets from '~/components/organisms/Assets.vue'
 import Loading from '~/components/organisms/Loading.vue'
-import TwitterButton from '~/components/organisms/TwitterButtons.vue'
+import ShareShop from '~/components/organisms/ShareShop.vue'
 
 @Component({
   components: {
     Assets,
     Loading,
-    TwitterButton
+    ShareShop
   }
 })
 export default class Index extends Vue {
@@ -32,7 +31,7 @@ export default class Index extends Vue {
   assets = null
   loading = true
   shopOwnerAddress = ''
-  forTradeComunityText = 'aaaa'
+  shareText = 'aaaa'
   shopOwner = false
   async mounted() {
     this.shopOwnerAddress = this.$route.params.shopOwnerAddress
@@ -75,7 +74,7 @@ export default class Index extends Vue {
       text += `\n出）${asset.name}\n求）${this.$utils.computePrice(asset.order.takerAssetAmount)}ETH\n`
     })
     text += `\nhttps://bananana.io${this.$route.path}`
-    this.forTradeComunityText = text
+    this.shareText = text
   }
 }
 </script>

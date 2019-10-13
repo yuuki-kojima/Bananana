@@ -1,9 +1,7 @@
 <template>
-  <section class="section">
-    <a :href="href" target="_blank">
-      <v-btn dark color="#00b0ed">Tweet</v-btn>
-    </a>
-  </section>
+  <a :href="href" target="_blank">
+    <v-btn dark color="#00b0ed">Tweet</v-btn>
+  </a>
 </template>
 
 <script lang="ts">
@@ -18,9 +16,3 @@ export default class DefaultLayout extends Vue {
   }
 }
 </script>
-
-<style scoped>
-section {
-  text-align: center;
-}
-</style>
