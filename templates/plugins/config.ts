@@ -53,8 +53,8 @@ for (let i = 0; i < feeDistribution.length; i++) {
 }
 
 const whitelists: any[] = []
-for (let i = 0; i < Object.keys(networkIdToTokens[networkId]).length; i++) {
-  whitelists.push(Object.entries(networkIdToTokens[networkId])[i][1].contract)
+for (let i = 0; i < networkIdToTokens[networkId].length; i++) {
+  whitelists.push(networkIdToTokens[networkId][i].contract)
 }
 
 export const config = {
